@@ -1,0 +1,255 @@
+<template>
+	<view class="content"
+		:style="background ? 'background: url(' + background + ') no-repeat top; background-size: 100% auto;' : ''">
+		
+		<uni-nav-bar title="首页" :fixed="true" :statusBar="true" :placeholder="false">
+			<!-- 顶部小搜索框 -->
+			<view slot="left" @click="clickLink('/pages/search/search')">
+				<view class="zhuige-nav-search">
+					<uni-icons type="search" size="20" color="#999999"></uni-icons>
+					<text>关键词...</text>
+				</view>
+			</view>
+		</uni-nav-bar>
+
+		<view class="zhuige-main-top">
+			<!-- 大图轮播 -->
+			<view v-if="slides && slides.length>0" class="zhuige-swiper">
+				<swiper indicator-dots="true" autoplay="autoplay" circular="ture"
+					indicator-color="rgba(255,255,255, 0.3)" indicator-active-color="rgba(255,255,255, 0.8)"
+					interval="5000" duration="150" easing-function="linear">
+					<swiper-item v-for="(slide, index) in slides" :key="index" @click="clickLink(slide.link)">
+						<image :src="slide.image" mode="aspectFill"></image>
+					</swiper-item>
+				</swiper>
+			</view>
+
+			<!-- 自定义图标 -->
+			<view v-if="icon_navs && icon_navs.length>0" class="zhuige-icon-menu">
+				<view v-for="(icon, index) in icon_navs" :key="index" @click="clickLink(icon.link)">
+					<image :src="icon.image" mode="aspectFill"></image>
+					<text>{{icon.title}}</text>
+				</view>
+			</view>
+		</view>
+
+		<!-- 滑动推荐 -->
+		<view v-if="home_rec" class="zhuige-recom">
+			<view class="zhuige-title">
+				<view>{{home_rec.title}}</view>
+				<text>滑动查看</text>
+			</view>
+			<view v-if="home_rec.posts && home_rec.posts.length>0" class="zhuige-scroll">
+				<scroll-view scroll-x="true">
+					<view v-for="(post,index) in home_rec.posts" :key="index"
+						@click="clickLink('/pages/detail/detail?goods_id=' + post.id)" class="zhuige-scroll-block">
+						<image :src="post.thumbnail" mode="aspectFill"></image>
+						<view>{{post.title}}</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+
+		<view class="zhuige-goods-group">
+			<!-- 滑动导航 -->
+			<view class="zhuige-goods-nav">
+				<view class="zhuige-goods-scroll">
+					<scroll-view>
+						<view v-for="(item,index) in cats" :key="index" :class="cat_id==item.id?'active':''"
+							@click="clickTab(item.id)">
+							{{item.name}}
+						</view>
+					</scroll-view>
+				</view>
+				<view @click="clickCategory" class="zhuige-goods-more">
+					<uni-icons type="bars" size="24"></uni-icons>
+				</view>
+			</view>
+
+			<!-- 商品列表 -->
+			<template v-if="goods_list.length>0">
+				<view class="zhuige-goods-list">
+					<view v-for="(item,index) in goods_list" :key="index"
+						@click="clickLink('/pages/detail/detail?goods_id=' + item.id)" class="zhuige-goods">
+						<image :src="item.thumbnail" mode="aspectFill"></image>
+						<view class="zhuige-goods-text">
+							<view class="zhuige-goods-title">
+								<text v-if="item.badge" class="mark">{{item.badge}}</text>
+								<text>{{item.title}}</text>
+							</view>
+							<view class="zhuige-goods-price">
+								<view class="promotion">
+									<text>￥</text>
+									<text>{{item.price}}</text>
+								</view>
+								<view class="original">
+									<text>￥{{item.orig_price}}</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<uni-load-more :status="loadMore"></uni-load-more>
+			</template>
+			<template v-else>
+				<jiangqie-no-data v-if="loaded"></jiangqie-no-data>
+			</template>
+		</view>
+
+	</view>
+</template>
+
+<script>
+	import Util from '@/utils/util';
+	import Alert from '@/utils/alert';
+	import Api from '@/utils/api';
+	import Rest from '@/utils/rest';
+	import JiangqieNoData from "@/components/nodata/nodata";
+	import {
+		mapGetters,
+	} from 'vuex'
+
+	export default {
+		data() {
+			return {
+				background: undefined,
+				share_thumb: undefined,
+
+				slides: [],
+				icon_navs: [],
+				home_rec: undefined,
+
+				cats: [],
+				cat_id: undefined,
+
+				goods_list: [],
+				loadMore: 'more',
+				loaded: false,
+			}
+		},
+
+		computed: {
+			...mapGetters([
+				'getCartCount'
+			])
+		},
+
+		components: {
+			JiangqieNoData,
+		},
+
+		onLoad(options) {
+			this.loadSetting();
+			this.loadGoods();
+		},
+
+		onShow() {
+			Util.updateCartBadge(this.getCartCount);
+		},
+
+		onReachBottom() {
+			if (this.loadMore == 'more') {
+				this.loadGoods();
+			}
+		},
+
+		onPullDownRefresh() {
+			this.refresh();
+		},
+
+		onShareAppMessage() {
+			let params = {
+				title: getApp().globalData.appDesc + '_' + getApp().globalData.appName,
+				path: 'pages/index/index'
+			};
+
+			if (this.share_thumb) {
+				params.imageUrl = this.share_thumb;
+			}
+
+			return params;
+		},
+
+		// #ifdef MP-WEIXIN
+		onShareTimeline() {
+			return {
+				title: getApp().globalData.appName
+			};
+		},
+		// #endif
+
+		methods: {
+			refresh() {
+				this.loadSetting();
+
+				this.loaded = false;
+				this.goods_list = [];
+				this.loadGoods();
+			},
+
+			clickLink(link) {
+				Util.openLink(link);
+			},
+
+			clickTab(cat_id) {
+				this.cat_id = cat_id;
+
+				this.loaded = false;
+				this.goods_list = [];
+				this.loadGoods();
+			},
+
+			clickCategory() {
+				uni.switchTab({
+					url: '/pages/category/category'
+				})
+			},
+
+			loadSetting() {
+				Rest.post(Api.ZHUIGE_SHOP_SETTING_HOME).then(res => {
+					getApp().globalData.appName = res.data.title;
+					getApp().globalData.appDesc = res.data.desc;
+
+					this.background = res.data.background;
+					this.share_thumb = res.data.thumb;
+
+					this.slides = res.data.slides;
+					this.icon_navs = res.data.icon_navs;
+					this.home_rec = res.data.home_rec;
+
+					this.cats = res.data.cats;
+					this.cat_id = this.cats[0].id;
+
+					uni.stopPullDownRefresh();
+				}, err => {
+					console.log(err)
+				});
+			},
+
+			loadGoods() {
+				if (this.loadMore == 'loading') {
+					return;
+				}
+				this.loadMore = 'loading';
+
+				let params = {
+					offset: this.goods_list.length
+				};
+
+				if (this.cat_id) {
+					params.cat_id = this.cat_id;
+				}
+
+				Rest.post(Api.ZHUIGE_SHOP_GOODS_LAST, params).then(res => {
+					this.goods_list = this.goods_list.concat(res.data.list);
+					this.loadMore = res.data.more;
+					this.loaded = true;
+				});
+			}
+		}
+	}
+</script>
+
+<style>
+	@import "@/style/main.css";
+</style>
