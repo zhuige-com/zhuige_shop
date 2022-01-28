@@ -46,7 +46,7 @@ class ZhuiGe_Shop_Activator
             `paytime` int(10) UNSIGNED DEFAULT NULL COMMENT '支付时间',
             `canceltime` int(10) UNSIGNED DEFAULT NULL COMMENT '取消时间',
             `confirmtime` int(10) UNSIGNED DEFAULT NULL COMMENT '确认时间',
-            `deletetime` int(10) UNSIGNED DEFAULT NULL COMMENT '删除时间'
+            `deletetime` int(10) UNSIGNED DEFAULT NULL COMMENT '删除时间',
             PRIMARY KEY (`id`)
         ) $charset_collate;";
         dbDelta($sql);
