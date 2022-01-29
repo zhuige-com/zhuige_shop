@@ -2,10 +2,10 @@
 Contributors: zhuige
 Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
-Requires at least: 5.4
-Tested up to: 5.8.1
-Stable tag: 1.2.0
-Requires PHP: 7.0
+Requires at least: 5.8
+Tested up to: 5.9
+Stable tag: 1.0.0
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

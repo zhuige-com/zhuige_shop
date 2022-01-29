@@ -80,7 +80,7 @@
   <h4>Key Features</h4>
 
   <ul>
-    <li>WordPress 5.6.x Ready</li>
+    <li>WordPress 5.9.x Ready</li>
     <li>Gutenberg Ready</li>
     <li>Multiple instances</li>
     <li>Unlimited frameworks</li>

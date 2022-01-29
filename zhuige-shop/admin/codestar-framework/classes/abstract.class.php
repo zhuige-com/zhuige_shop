@@ -17,7 +17,8 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
 
       // Collect output css and typography
       if ( ! empty( $this->args['output_css'] ) || ! empty( $this->args['enqueue_webfont'] ) ) {
-        add_action( 'wp_enqueue_scripts', array( &$this, 'collect_output_css_and_typography' ), 10 );
+        add_action( 'wp_enqueue_scripts', array( $this, 'collect_output_css_and_typography' ), 10 );
+        CSF::$css = apply_filters( "csf_{$this->unique}_output_css", CSF::$css, $this );
       }
 
     }
@@ -36,12 +37,10 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
           $field_type   = ( ! empty( $field['type'] ) ) ? $field['type'] : '';
           $field_output = ( ! empty( $field['output'] ) ) ? $field['output'] : '';
           $field_check  = ( $field_type === 'typography' || $field_output ) ? true : false;
+          $field_class  = 'CSF_Field_' . $field_type;
 
           if ( $field_type && $field_id ) {
 
-            CSF::maybe_include_field( $field_type );
-
-            $class_name = 'CSF_Field_' . $field_type;
 
             if( $field_type === 'fieldset' ) {
               if ( ! empty( $field['fields'] ) ) {
@@ -65,9 +64,9 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
               }
             }
 
-            if ( class_exists( $class_name ) ) {
+            if ( class_exists( $field_class ) ) {
 
-              if ( method_exists( $class_name, 'output' ) || method_exists( $class_name, 'enqueue_google_fonts' ) ) {
+              if ( method_exists( $field_class, 'output' ) || method_exists( $field_class, 'enqueue_google_fonts' ) ) {
 
                 $field_value = '';
 
@@ -99,7 +98,7 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
 
                 }
 
-                $instance = new $class_name( $field, $field_value, $this->unique, 'wp/enqueue', $this );
+                $instance = new $field_class( $field, $field_value, $this->unique, 'wp/enqueue', $this );
 
                 // typography enqueue and embed google web fonts
                 if ( $field_type === 'typography' && $this->args['enqueue_webfont'] && ! empty( $field_value['font-family'] ) ) {

@@ -147,8 +147,6 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
-		date_default_timezone_set("Asia/Shanghai");
-
 		global $wpdb;
 		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
 		if (!$order) {
@@ -190,8 +188,6 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('此订单状态异常');
 		}
 
-		date_default_timezone_set("Asia/Shanghai");
-
 		$canceltime = time();
 		$wpdb->update("{$wpdb->prefix}zhuige_shop_user_order", ['canceltime' => $canceltime], ['id' => $order_id, 'user_id' => $my_user_id], ['%d'], ['%d', '%d']);
 
@@ -223,8 +219,6 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('此订单状态异常');
 		}
 
-		date_default_timezone_set("Asia/Shanghai");
-
 		$deletetime = time();
 		$wpdb->update("{$wpdb->prefix}zhuige_shop_user_order", ['deletetime' => $deletetime], ['id' => $order_id, 'user_id' => $my_user_id], ['%d'], ['%d', '%d']);
 
@@ -245,8 +239,6 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		if (empty($order_id)) {
 			return $this->make_error('缺少参数');
 		}
-
-		date_default_timezone_set("Asia/Shanghai");
 
 		global $wpdb;
 		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
@@ -302,15 +294,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			$where = ' AND canceltime is not null ';
 		}
 
-		//设置时区 修复8小时
-		date_default_timezone_set("Asia/Shanghai");
-
 		global $wpdb;
 		$orders = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}zhuige_shop_user_order`"
 			. " WHERE `user_id`=$my_user_id AND deletetime is null $where ORDER BY `id` DESC LIMIT $offset, " . ZhuiGe_Shop::POSTS_PER_PAGE, ARRAY_A);
 		foreach ($orders as &$order) {
 			$order['goods_list'] = unserialize($order['goods_list']);
-			$order['createtime'] = date('Y.m.d H:i:s', $order['createtime']);
+			$order['createtime'] = wp_date('Y.m.d H:i:s', $order['createtime']);
 		}
 
 		return $this->make_success(['more' => count($orders) == ZhuiGe_Shop::POSTS_PER_PAGE ? 'more' : 'nomore', 'orders' => $orders]);
@@ -354,8 +343,6 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
-		date_default_timezone_set("Asia/Shanghai");
-
 		global $wpdb;
 		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
 		if (!$order) {
@@ -367,9 +354,9 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		$order['goods_list'] = unserialize($order['goods_list']);
-		$order['createtime'] = date('Y.m.d H:i:s', $order['createtime']);
+		$order['createtime'] = wp_date('Y.m.d H:i:s', $order['createtime']);
 		if ($order['paytime']) {
-			$order['paytime'] = date('Y.m.d H:i:s', $order['paytime']);
+			$order['paytime'] = wp_date('Y.m.d H:i:s', $order['paytime']);
 		}
 
 		return $this->make_success(['order' => $order]);

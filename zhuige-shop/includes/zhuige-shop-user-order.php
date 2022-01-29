@@ -34,17 +34,19 @@ function zhuige_shop_add_score_order_menu() {
 }
 
 function zhuige_shop_render_score_order() {
-	$action = isset($_GET['action']) ? $_GET['action'] : '';
+	$action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : '';
+
 	if ('edit' == $action) {
-		$id = isset($_GET['id']) ? $_GET['id'] : '';
+		$id = isset($_GET['id']) ? sanitize_text_field(wp_unslash($_GET['id'])) : '';
+
 		$order = [];
 		global $wpdb;
 		$table_score_order = $wpdb->prefix . 'zhuige_shop_user_order';
 		$order = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_score_order WHERE id=%d", $id), ARRAY_A);
 
 		if (isset($_POST['submit'])) {
-			$express_type = isset($_POST['express_type']) ? $_POST['express_type'] : '';
-			$express_no = isset($_POST['express_no']) ? $_POST['express_no'] : '';
+			$express_type = isset($_POST['express_type']) ? sanitize_text_field(wp_unslash($_POST['express_type'])) : '';
+			$express_no = isset($_POST['express_no']) ? sanitize_text_field(wp_unslash($_POST['express_no'])) : '';
 			$error = '';
 			$success = '';
 
@@ -149,7 +151,7 @@ function zhuige_shop_render_score_order() {
 <?php
 	} else {
 		$user_order_list = new ZhuiGe_Shop_User_Order_List();
-		$search = isset($_GET['s']) ? $_GET['s'] : '';
+		$search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
 		$user_order_list->prepare_items($search);
 ?>
 		<div class="wrap">
@@ -170,12 +172,12 @@ function zhuige_shop_render_score_order() {
 			<?php $user_order_list->views(); ?>
 
 			<form method="get">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+				<input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']) ?>" />
 				<?php $user_order_list->search_box('搜索', 'search_id'); ?>
 			</form>
 
 			<form id="movies-filter" method="get">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']) ?>" />
 				<?php $user_order_list->display() ?>
 			</form>
 		</div>

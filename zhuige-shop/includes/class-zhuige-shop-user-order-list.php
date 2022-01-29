@@ -34,9 +34,11 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 
 		$sql = $this->parseZGZT($sql);
 
-		if (!empty($_REQUEST['orderby'])) {
-			$sql .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
-			$sql .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
+		$orderby = (isset($_REQUEST['orderby'])) ? sanitize_text_field(wp_unslash($_REQUEST['orderby'])) : '';
+		$order = (isset($_REQUEST['order'])) ? sanitize_text_field(wp_unslash($_REQUEST['order'])) : '';
+		if (!empty($orderby)) {
+			$sql .= ' ORDER BY ' . esc_sql($orderby);
+			$sql .= !empty($order) ? ' ' . esc_sql($order) : ' ASC';
 		} else {
 			$sql .= ' ORDER BY createtime DESC';
 		}
@@ -99,24 +101,13 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 
 	protected function column_user($item)
 	{
-		// $avatar = ZhuiGe_Shop::user_avatar($item['user_id']);
 		$nickname = get_user_meta($item['user_id'], 'nickname', true);
-		// return "<img src='$avatar' style='width:48px;height:48px;'/><div>昵称：$nickname </div>";
 		return $nickname;
 	}
 
 	protected function column_goods($item)
 	{
 		$goods_list = unserialize($item['goods_list']);
-		// $content = "<ol>";
-		// foreach ($goods_list as $goods) {
-		// 	$content .= "<li>";
-		// 	$content .= "<img src='" . $goods['thumb'] . "' style='width:48px;height:48px;'/>";
-		// 	$content .= "<div>" . $goods['name'] . "</div>";
-		// 	$content .= "<div>" . $goods['price'] . "元 X " . $goods['count'] . "</div>";
-		// 	$content .= "</li>";
-		// }
-		// $content .= "</ol>";
 
 		$content = "<table>";
 		foreach ($goods_list as $goods) {
@@ -144,7 +135,7 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 		$value = "<div>" . $item['express_type'] . "</div>";
 		$value .= "<div>快递单号：" . $item['express_no'] . "</div>";
 
-		$page = wp_unslash($_REQUEST['page']); // WPCS: Input var ok.
+		$page = (isset($_REQUEST['page'])) ? sanitize_text_field(wp_unslash($_REQUEST['page'])) : '';
 
 		// Build edit row action.
 		$edit_query_args = array(
@@ -190,7 +181,7 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 
 	protected function column_createtime($item)
 	{
-		return date("Y-m-d H:i:s", $item['createtime']);
+		return wp_date("Y-m-d H:i:s", $item['createtime']);
 	}
 
 	protected function get_bulk_actions()
@@ -218,7 +209,7 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 			$page = wp_unslash($_REQUEST['page']);
 			$query = ['page' => $page];
 			$redirect = add_query_arg($query, admin_url('admin.php'));
-			echo '<script>window.location.href="' . $redirect . '"</script>';
+			echo '<script>window.location.href="' . esc_url($redirect) . '"</script>';
 		}
 	}
 
@@ -244,23 +235,10 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 		));
 	}
 
-	/**
-	 * Callback to allow sorting of example data.
-	 *
-	 * @param string $a First value.
-	 * @param string $b Second value.
-	 *
-	 * @return int
-	 */
 	protected function usort_reorder($a, $b)
 	{
-		// If no sort, default to title.
 		$orderby = !empty($_REQUEST['orderby']) ? wp_unslash($_REQUEST['orderby']) : 'title'; // WPCS: Input var ok.
-
-		// If no order, default to asc.
 		$order = !empty($_REQUEST['order']) ? wp_unslash($_REQUEST['order']) : 'asc'; // WPCS: Input var ok.
-
-		// Determine sort order.
 		$result = strcmp($a[$orderby], $b[$orderby]);
 
 		return ('asc' === $order) ? $result : -$result;

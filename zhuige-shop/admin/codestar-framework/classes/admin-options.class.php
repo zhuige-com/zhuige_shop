@@ -52,6 +52,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
       'sticky_header'           => true,
       'save_defaults'           => true,
       'ajax_save'               => true,
+      'form_action'             => '',
 
       // admin bar menu settings
       'admin_bar_menu_icon'     => '',
@@ -103,12 +104,12 @@ if ( ! class_exists( 'CSF_Options' ) ) {
       $this->set_options();
       $this->save_defaults();
 
-      add_action( 'admin_menu', array( &$this, 'add_admin_menu' ) );
-      add_action( 'admin_bar_menu', array( &$this, 'add_admin_bar_menu' ), $this->args['admin_bar_menu_priority'] );
-      add_action( 'wp_ajax_csf_'. $this->unique .'_ajax_save', array( &$this, 'ajax_save' ) );
+      add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+      add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), $this->args['admin_bar_menu_priority'] );
+      add_action( 'wp_ajax_csf_'. $this->unique .'_ajax_save', array( $this, 'ajax_save' ) );
 
       if ( $this->args['database'] === 'network' && ! empty( $this->args['show_in_network'] ) ) {
-        add_action( 'network_admin_menu', array( &$this, 'add_admin_menu' ) );
+        add_action( 'network_admin_menu', array( $this, 'add_admin_menu' ) );
       }
 
       // wp enqeueu for typography and output css
@@ -185,7 +186,11 @@ if ( ! class_exists( 'CSF_Options' ) ) {
     // add admin bar menu
     public function add_admin_bar_menu( $wp_admin_bar ) {
 
-      if( is_network_admin() && ( $this->args['database'] !== 'network' || $this->args['show_in_network'] !== true ) ) {
+      if ( ! current_user_can( $this->args['menu_capability'] ) ) {
+        return;
+      }
+
+      if ( is_network_admin() && ( $this->args['database'] !== 'network' || $this->args['show_in_network'] !== true ) ) {
         return;
       }
 
@@ -437,14 +442,14 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       if ( $menu_type === 'submenu' ) {
 
-        $menu_page = call_user_func( 'add_submenu_page', $menu_parent, esc_attr( $menu_title ), esc_attr( $menu_title ), $menu_capability, $menu_slug, array( &$this, 'add_options_html' ) );
+        $menu_page = call_user_func( 'add_submenu_page', $menu_parent, esc_attr( $menu_title ), esc_attr( $menu_title ), $menu_capability, $menu_slug, array( $this, 'add_options_html' ) );
 
       } else {
 
-        $menu_page = call_user_func( 'add_menu_page', esc_attr( $menu_title ), esc_attr( $menu_title ), $menu_capability, $menu_slug, array( &$this, 'add_options_html' ), $menu_icon, $menu_position );
+        $menu_page = call_user_func( 'add_menu_page', esc_attr( $menu_title ), esc_attr( $menu_title ), $menu_capability, $menu_slug, array( $this, 'add_options_html' ), $menu_icon, $menu_position );
 
         if ( ! empty( $sub_menu_title ) ) {
-          call_user_func( 'add_submenu_page', $menu_slug, esc_attr( $sub_menu_title ), esc_attr( $sub_menu_title ), $menu_capability, $menu_slug, array( &$this, 'add_options_html' ) );
+          call_user_func( 'add_submenu_page', $menu_slug, esc_attr( $sub_menu_title ), esc_attr( $sub_menu_title ), $menu_capability, $menu_slug, array( $this, 'add_options_html' ) );
         }
 
         if ( ! empty( $this->args['show_sub_menu'] ) && count( $this->pre_tabs ) > 1 ) {
@@ -464,7 +469,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       }
 
-      add_action( 'load-'. $menu_page, array( &$this, 'add_page_on_load' ) );
+      add_action( 'load-'. $menu_page, array( $this, 'add_page_on_load' ) );
 
     }
 
@@ -484,7 +489,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       }
 
-      add_filter( 'admin_footer_text', array( &$this, 'add_admin_footer_text' ) );
+      add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ) );
 
     }
 
@@ -533,6 +538,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
       $theme         = ( $this->args['theme'] ) ? ' csf-theme-'. $this->args['theme'] : '';
       $class         = ( $this->args['class'] ) ? ' '. $this->args['class'] : '';
       $nav_type      = ( $this->args['nav'] === 'inline' ) ? 'inline' : 'normal';
+      $form_action   = ( $this->args['form_action'] ) ? $this->args['form_action'] : '';
 
       do_action( 'csf_options_before' );
 
@@ -540,7 +546,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
         echo '<div class="csf-container">';
 
-        echo '<form method="post" action="" enctype="multipart/form-data" id="csf-form" autocomplete="off" novalidate="novalidate">';
+        echo '<form method="post" action="'. esc_attr( $form_action ) .'" enctype="multipart/form-data" id="csf-form" autocomplete="off" novalidate="novalidate">';
 
         echo '<input type="hidden" class="csf-section-id" name="csf_transient[section]" value="1">';
 
