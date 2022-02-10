@@ -70,6 +70,10 @@ module.exports = {
 	 */
 	ZHUIGE_SHOP_USER_LOGIN: makeURL('user', 'login'),
 	
+	/**
+	 * 注销
+	 */
+	ZHUIGE_SHOP_USER_LOGOUT: makeURL('user', 'logout'),
 	
 	// ---------- 订单 ----------
 	

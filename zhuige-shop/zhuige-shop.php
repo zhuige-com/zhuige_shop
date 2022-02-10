@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name:		ZhuiGe Shop Mini Program
+ * Plugin Name:		追格商城小程序
  * Plugin URI:		https://www.zhuige.com/product/sc.html
- * Description:		WordPress + uni-app 购物商城小程序
- * Version:			1.0.0
+ * Description:		WordPress + uni-app 商城小程序。
+ * Version:			1.1.0
  * Author:			追格
  * Author URI:		https://www.zhuige.com/
  * License:			GPLv2 or later
@@ -16,7 +16,7 @@ if (!defined('WPINC')) {
 	die;
 }
 
-define('ZHUIGE_SHOP_VERSION', '1.0.0');
+define('ZHUIGE_SHOP_VERSION', '1.1.0');
 define('ZHUIGE_SHOP_BASE_DIR', plugin_dir_path(__FILE__));
 define('ZHUIGE_SHOP_BASE_NAME', plugin_basename(__FILE__));
 define('ZHUIGE_SHOP_BASE_URL', plugin_dir_url(__FILE__));

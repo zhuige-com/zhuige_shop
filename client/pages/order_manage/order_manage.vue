@@ -141,10 +141,6 @@
 			if (options.tab) {
 				this.cur_tab = options.tab;
 			}
-			
-			this.loadCount();
-			
-			this.loadOrders();
 		},
 		
 		onShow() {

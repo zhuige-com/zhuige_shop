@@ -1,17 +1,81 @@
 {
-    "id": "zhuige-shop",
-    "name": "追格商城小程序（含后端）",
-    "version": "1.0.1",
-    "description": "追格商城小程序是基于WordPress和uni-app开发的多平台（支持微信小程序、H5网页、百度小程序、头条小程序等）购物商城系统，所有源代码无加密、无后门，简单配置即可发布！",
-    "keywords": [
+	"id": "zhuige-shop",
+	"name": "追格商城小程序",
+	"version": "1.1.0",
+	"description": "追格商城小程序是基于WordPress和uni-app开发的多平台（支持微信小程序、H5网页、百度小程序、头条小程序等）购物商城系统，所有源代码无加密、无后门，简单配置即可发布！",
+	"keywords": [
         "商城",
         "小程序",
         "追格"
     ],
-    "dcloudext": {
-        "category": [
-            "uni-app前端模板",
-            "uni-app前端项目模板"
-        ]
-    }
+	"displayName": "追格购物商城小程序（含后端-WordPress插件）",
+	"engines": {
+		"HBuilderX": "^3.2.16"
+	},
+	"dcloudext": {
+		"category": [
+			"前端页面模板",
+			"uni-app前端项目模板"
+		],
+		"sale": {
+			"regular": {
+				"price": "0.00"
+			},
+			"sourcecode": {
+				"price": "0.00"
+			}
+		},
+		"contact": {
+			"qq": ""
+		},
+		"declaration": {
+			"ads": "无",
+			"data": "无",
+			"permissions": "无"
+		},
+		"npmurl": ""
+	},
+	"uni_modules": {
+	        "platforms": {
+	            "cloud": {
+	                "tcb": "y",
+	                "aliyun": "y"
+	            },
+	            "client": {
+	                "App": {
+	                    "app-vue": "u",
+	                    "app-nvue": "u"
+	                },
+	                "H5-mobile": {
+	                    "Safari": "u",
+	                    "Android Browser": "u",
+	                    "微信浏览器(Android)": "u",
+	                    "QQ浏览器(Android)": "u"
+	                },
+	                "H5-pc": {
+	                    "Chrome": "u",
+	                    "IE": "u",
+	                    "Edge": "u",
+	                    "Firefox": "u",
+	                    "Safari": "u"
+	                },
+	                "小程序": {
+	                    "微信": "y",
+	                    "阿里": "u",
+	                    "百度": "u",
+	                    "字节跳动": "u",
+	                    "QQ": "u"
+	                },
+	                "快应用": {
+	                    "华为": "u",
+	                    "联盟": "u"
+	                },
+	                "Vue": {
+	                    "vue2": "y",
+	                    "vue3": "u"
+	                }
+	            }
+	        }
+        },
+        "repository": "https://gitee.com/longwenjunj/zhuige_shop"
 }

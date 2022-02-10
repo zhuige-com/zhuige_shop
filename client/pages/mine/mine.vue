@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 
-		<view @click="clickLink('/pages/login/login')" class="zhuige-user-login"
+		<view @click="clickAvatar" class="zhuige-user-login"
 			:style="background ? 'background: url(' + background + ') no-repeat center center; background-size: 100% 100%;':''">
 			<template v-if="user">
 				<image :src="user.avatar" mode="aspectFill"></image>
@@ -15,27 +15,23 @@
 
 		<view class="zhuige-icon-set">
 			<view @click="clickOrder('create')" class="zhuige-icon">
-				<image
-					src="../../static/images/icon01.png"
-					mode="aspectFill"></image>
+				<uni-badge size="small" :text="create_count" absolute="rightTop" type="error">
+					<image src="../../static/images/icon01.png" mode="aspectFill"></image>
+				</uni-badge>
 				<view>待付款</view>
 			</view>
 			<view @click="clickOrder('pay')" class="zhuige-icon">
-				<image
-					src="../../static/images/icon02.png"
-					mode="aspectFill"></image>
+				<uni-badge size="small" :text="pay_count" absolute="rightTop" type="error">
+					<image src="../../static/images/icon02.png" mode="aspectFill"></image>
+				</uni-badge>
 				<view>待收货</view>
 			</view>
 			<view @click="clickOrder('confirm')" class="zhuige-icon">
-				<image
-					src="../../static/images/icon03.png"
-					mode="aspectFill"></image>
+				<image src="../../static/images/icon03.png" mode="aspectFill"></image>
 				<view>售后/退换</view>
 			</view>
 			<view @click="clickOrder('all')" class="zhuige-icon">
-				<image
-					src="../../static/images/icon04.png"
-					mode="aspectFill"></image>
+				<image src="../../static/images/icon04.png" mode="aspectFill"></image>
 				<view>全部订单</view>
 			</view>
 		</view>
@@ -86,7 +82,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="zhuige-brand">追格 zhuige.com 提供技术支持</view>
 
 	</view>
@@ -110,9 +106,12 @@
 				background: undefined,
 
 				page_about: undefined,
+
+				create_count: 0,
+				pay_count: 0,
 			}
 		},
-		
+
 		computed: {
 			...mapGetters([
 				'getCartCount'
@@ -131,8 +130,14 @@
 		onShow() {
 			Util.updateCartBadge(this.getCartCount);
 			this.user = Auth.getUser();
+			if (this.user) {
+				Rest.post(Api.ZHUIGE_SHOP_ORDER_COUNT).then(res => {
+					this.create_count = parseInt(res.data.create_count);
+					this.pay_count = parseInt(res.data.pay_count);
+				});
+			}
 		},
-		
+
 		onShareAppMessage() {
 			return {
 				title: getApp().globalData.appDesc + '_' + getApp().globalData.appName,
@@ -144,9 +149,17 @@
 			clickLink(link) {
 				Util.openLink(link);
 			},
-			
+
+			clickAvatar() {
+				if (this.user) {
+					return;
+				}
+
+				Util.openLink('/pages/login/login');
+			},
+
 			clickOrder(tab) {
-				Util.openLink('/pages/order_manage/order_manage?tab=' + tab);	
+				Util.openLink('/pages/order_manage/order_manage?tab=' + tab);
 			},
 
 			clickAbout() {
@@ -160,7 +173,7 @@
 					success(res) {
 						if (res.confirm) {
 							if (Auth.getUser()) {
-								Rest.post(Api.ZG_USER_LOGOUT).then(res => {
+								Rest.post(Api.ZHUIGE_SHOP_USER_LOGOUT).then(res => {
 									console.log(res);
 								}, err => {
 									console.log(err);

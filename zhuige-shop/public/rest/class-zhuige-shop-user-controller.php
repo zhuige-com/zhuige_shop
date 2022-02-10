@@ -18,6 +18,7 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		$this->module = 'user';
 		$this->routes = [
 			'login' => 'user_login',
+			'logout' => 'user_logout',
 		];
 	}
 
@@ -86,6 +87,21 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		);
 
 		return $this->make_success($user);
+	}
+
+	/**
+	 *用户注销
+	 */
+	public function user_logout($request)
+	{
+		$my_user_id = get_current_user_id();
+		if (!$my_user_id) {
+			return $this->make_error('还没有登陆', -1);
+		}
+
+		update_user_meta($my_user_id, 'zhuige_token', '');
+
+		return $this->make_success();
 	}
 
 	/**
