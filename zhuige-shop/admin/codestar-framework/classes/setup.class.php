@@ -11,7 +11,7 @@ if ( ! class_exists( 'CSF' ) ) {
   class CSF {
 
     // Default constants
-    public static $premium  = false;
+    public static $premium  = true;
     public static $version  = '2.2.6';
     public static $dir      = '';
     public static $url      = '';
