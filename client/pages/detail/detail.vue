@@ -91,7 +91,7 @@
 		onShareAppMessage() {
 			return {
 				title: this.goods.title  + '_' +  getApp().globalData.appName,
-				path: 'pages/goods/goods?goods_id=' + this.goods_id
+				path: 'pages/detail/detail?goods_id=' + this.goods_id
 			};
 		},
 		
