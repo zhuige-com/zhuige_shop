@@ -142,13 +142,17 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$order_id = $this->param_value($request, 'order_id');
+		$order_id = (int)($this->param_value($request, 'order_id'));
 		if (empty($order_id)) {
 			return $this->make_error('缺少参数');
 		}
 
 		global $wpdb;
-		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
+		$order = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+			),
+		ARRAY_A);
 		if (!$order) {
 			return $this->make_error('无权查看此订单');
 		}
@@ -159,6 +163,17 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 
 		$confirmtime = time();
 		$wpdb->update("{$wpdb->prefix}zhuige_shop_user_order", ['confirmtime' => $confirmtime], ['id' => $order_id, 'user_id' => $my_user_id], ['%d'], ['%d', '%d']);
+
+		//在待评论列表中记录
+		$goods_list = unserialize($order['goods_list']);
+		foreach ($goods_list as $goods) {
+			$wpdb->insert("{$wpdb->prefix}zhuige_shop_goods_comment", [
+				'user_id' => $my_user_id,
+				'order_id' => $order['id'],
+				'goods_id' => $goods['id'],
+				'createtime' => time()
+			]);
+		}
 
 		return $this->make_success(['confirmtime' => $confirmtime]);
 	}
@@ -173,13 +188,17 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$order_id = $this->param_value($request, 'order_id');
+		$order_id = (int)($this->param_value($request, 'order_id'));
 		if (empty($order_id)) {
 			return $this->make_error('缺少参数');
 		}
 
 		global $wpdb;
-		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
+		$order = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+			),
+		ARRAY_A);
 		if (!$order) {
 			return $this->make_error('无权查看此订单');
 		}
@@ -204,13 +223,17 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$order_id = $this->param_value($request, 'order_id');
+		$order_id = (int)($this->param_value($request, 'order_id'));
 		if (empty($order_id)) {
 			return $this->make_error('缺少参数');
 		}
 
 		global $wpdb;
-		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
+		$order = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+			),
+		ARRAY_A);
 		if (!$order) {
 			return $this->make_error('无权查看此订单');
 		}
@@ -235,13 +258,17 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$order_id = $this->param_value($request, 'order_id');
+		$order_id = (int)($this->param_value($request, 'order_id'));
 		if (empty($order_id)) {
 			return $this->make_error('缺少参数');
 		}
 
 		global $wpdb;
-		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
+		$order = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+			),
+		ARRAY_A);
 		if (!$order) {
 			return $this->make_error('无权查看');
 		}
@@ -281,7 +308,7 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 		$filter = $this->param_value($request, 'filter', '');
 		$where = '';
 		if ($filter == 'create') {
@@ -295,8 +322,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		global $wpdb;
-		$orders = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}zhuige_shop_user_order`"
-			. " WHERE `user_id`=$my_user_id AND deletetime is null $where ORDER BY `id` DESC LIMIT $offset, " . ZhuiGe_Shop::POSTS_PER_PAGE, ARRAY_A);
+		$orders = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM `{$wpdb->prefix}zhuige_shop_user_order` WHERE `user_id`=%d AND deletetime is null $where ORDER BY `id` DESC LIMIT %d, %d",
+				$my_user_id, $offset, ZhuiGe_Shop::POSTS_PER_PAGE
+			),
+		ARRAY_A);
 		foreach ($orders as &$order) {
 			$order['goods_list'] = unserialize($order['goods_list']);
 			$order['createtime'] = wp_date('Y.m.d H:i:s', $order['createtime']);
@@ -319,11 +350,31 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 
 		global $wpdb;
 		$table_order = "`{$wpdb->prefix}zhuige_shop_user_order` ";
-		$data['all_count'] = $wpdb->get_var("SELECT COUNT(id) FROM $table_order WHERE `user_id`=$my_user_id AND deletetime is null");
-		$data['create_count'] = $wpdb->get_var("SELECT COUNT(id) FROM $table_order WHERE `user_id`=$my_user_id AND deletetime is null AND paytime is null AND confirmtime is null AND canceltime is null");
-		$data['pay_count'] = $wpdb->get_var("SELECT COUNT(id) FROM $table_order WHERE `user_id`=$my_user_id AND deletetime is null AND paytime is not null AND confirmtime is null");
-		$data['confirm_count'] = $wpdb->get_var("SELECT COUNT(id) FROM $table_order WHERE `user_id`=$my_user_id AND deletetime is null AND confirmtime is not null");
-		$data['cancel_count'] = $wpdb->get_var("SELECT COUNT(id) FROM $table_order WHERE `user_id`=$my_user_id AND deletetime is null AND canceltime is not null");
+		$data['all_count'] = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null", $my_user_id
+			)
+		);
+		$data['create_count'] = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND paytime is null AND confirmtime is null AND canceltime is null", $my_user_id
+			)
+		);
+		$data['pay_count'] = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND paytime is not null AND confirmtime is null", $my_user_id
+			)
+		);
+		$data['confirm_count'] = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND confirmtime is not null", $my_user_id
+			)
+		);
+		$data['cancel_count'] = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND canceltime is not null", $my_user_id
+			)
+		);
 
 		return $this->make_success($data);
 	}
@@ -338,13 +389,17 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$order_id = $this->param_value($request, 'order_id');
+		$order_id = (int)($this->param_value($request, 'order_id'));
 		if (empty($order_id)) {
 			return $this->make_error('缺少参数');
 		}
 
 		global $wpdb;
-		$order = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=$order_id AND `user_id`=$my_user_id ", ARRAY_A);
+		$order = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+			),
+		ARRAY_A);
 		if (!$order) {
 			return $this->make_error('无权查看');
 		}

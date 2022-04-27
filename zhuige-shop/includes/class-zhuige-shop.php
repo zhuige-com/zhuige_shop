@@ -153,6 +153,7 @@ class ZhuiGe_Shop
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-user-controller.php';
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-goods-controller.php';
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-order-controller.php';
+		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-comment-controller.php';
 
 		/**
 		 * 后台管理
@@ -205,6 +206,7 @@ class ZhuiGe_Shop
 			new ZhuiGe_Shop_User_Controller(),
 			new ZhuiGe_Shop_Goods_Controller(),
 			new ZhuiGe_Shop_Order_Controller(),
+			new ZhuiGe_Shop_Comment_Controller(),
 		];
 		foreach ($controller as $control) {
 			$this->loader->add_action('rest_api_init', $control, 'register_routes');

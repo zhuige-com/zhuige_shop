@@ -315,7 +315,7 @@
 .zhuige-detail-img {
 }
 .zhuige-detail-img swiper, .zhuige-detail-img swiper-item, .zhuige-detail-img image {
-	height: 500rpx;
+	height: 750rpx;
 	width: 100%;
 	overflow: hidden;
 }

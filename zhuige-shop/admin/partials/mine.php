@@ -15,7 +15,7 @@
 //
 CSF::createSection($prefix, array(
     'id' => 'my',
-    'title' => '我的',
+    'title' => '我的设置',
     'icon'  => 'fas fa-user-cog',
     'fields' => array(
         array(

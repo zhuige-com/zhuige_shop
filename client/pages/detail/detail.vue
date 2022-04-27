@@ -3,9 +3,8 @@
 
 		<!-- 大图轮播 -->
 		<view v-if="goods && goods.slide && goods.slide.length>0" class="zhuige-detail-img">
-			<swiper indicator-dots="true" autoplay="autoplay" circular="ture"
-					indicator-color="rgba(255,255,255, 0.3)" indicator-active-color="rgba(255,255,255, 0.8)"
-					interval="5000" duration="150" easing-function="linear">
+			<swiper indicator-dots="true" autoplay="autoplay" circular="ture" indicator-color="rgba(255,255,255, 0.3)"
+				indicator-active-color="rgba(255,255,255, 0.8)" interval="5000" duration="150" easing-function="linear">
 				<swiper-item v-for="(item, index) in goods.slide" :key="index">
 					<image mode="aspectFill" :src="item.image.url"></image>
 				</swiper-item>
@@ -38,6 +37,31 @@
 			</view>
 		</view>
 
+		<view class="zhuige-comment-list">
+			<view class="zhuige-comment-header">
+				<text>用户评论</text>
+				<uni-icons @click="clickLink('/pages/comment/comment?goods_id=' + goods_id)" type="chatbubble" size="24"></uni-icons>
+			</view>
+
+			<template v-if="comments && comments.length>0">
+				<view v-for="(item,index) in comments" :key="index" class="zhuige-comment-item">
+					<view>
+						<image mode="aspectFill" class="avatar" :src="item.user.avatar"></image>
+					</view>
+					<view class="content-list">
+						<view>{{item.user.name}}</view>
+						<uni-rate :value="item.rate" :readonly="true" />
+						<view class="content">{{item.content}}</view>
+						<view class="time">{{item.time}}</view>
+					</view>
+				</view>
+				<uni-load-more :status="loadMore"></uni-load-more>
+			</template>
+			<template v-else>
+				<jiangqie-no-data v-if="loaded"></jiangqie-no-data>
+			</template>
+		</view>
+
 		<view class="zhuige-goods-bar">
 			<view @click="clickCart" class="zhuige-goods-cart-btn">
 				<uni-icons type="cart" size="30" color="#ff4400"></uni-icons>
@@ -64,12 +88,22 @@
 	} from 'vuex'
 	import store from '@/store/index.js'
 
+	import JiangqieNoData from "@/components/nodata/nodata";
+
 	export default {
 		data() {
 			return {
 				goods_id: 0,
 				goods: undefined,
+
+				comments: [],
+				loadMore: 'more',
+				loaded: false,
 			}
+		},
+
+		components: {
+			JiangqieNoData,
 		},
 
 		computed: {
@@ -82,19 +116,27 @@
 			this.goods_id = options.goods_id;
 
 			this.loadGoods();
+			this.loadComments(true);
 		},
 
 		onPullDownRefresh() {
 			this.loadGoods();
+			this.loadComments(true);
+		},
+
+		onReachBottom() {
+			if (this.loadMore == 'more') {
+				this.loadComments(false);
+			}
 		},
 
 		onShareAppMessage() {
 			return {
-				title: this.goods.title  + '_' +  getApp().globalData.appName,
+				title: this.goods.title + '_' + getApp().globalData.appName,
 				path: 'pages/detail/detail?goods_id=' + this.goods_id
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline() {
 			return {
@@ -105,18 +147,18 @@
 
 		methods: {
 			...mapMutations(['cartGoodsAdd']),
-			
+
 			clickLink(link) {
 				Util.openLink(link);
 			},
-			
+
 			// clickAddCart(goods_id, count) {
 			// 	store.commit('cartGoodsAdd', {goods_id: goods_id, count: count});
 			// },
-			
+
 			clickCart() {
 				uni.switchTab({
-					url : '/pages/cart/cart'
+					url: '/pages/cart/cart'
 				})
 			},
 
@@ -130,11 +172,69 @@
 				}, err => {
 					console.log(err)
 				});
+			},
+
+			loadComments(refresh) {
+				let params = {
+					post_id: this.goods_id
+				};
+				if (!refresh) {
+					params.offset = this.comments.length;
+				}
+				Rest.post(Api.ZHUIGE_SHOP_COMMENT_INDEX, params).then(res => {
+					this.comments = refresh ? res.data.comments : this.comments.concat(res.data.comments);
+					this.loadMore = res.data.more;
+					this.loaded = true;
+				}, err => {
+					console.log(err)
+				});
 			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	@import "@/style/main.css";
+
+	.zhuige-goods-detail {
+		padding-bottom: 30rpx;
+	}
+
+	.zhuige-comment-list {
+		padding: 30rpx 30rpx 140rpx;
+		border-top: 16rpx solid #EEEEEE;
+
+		.zhuige-comment-header {
+			display: flex;
+			justify-content: space-between;
+			font-size: 36rpx;
+			font-weight: 600;
+			padding-bottom: 20rpx;
+		}
+
+		.zhuige-comment-item {
+			display: flex;
+			padding: 10rpx 0;
+
+			.avatar {
+				width: 100rpx;
+				height: 100rpx;
+				border-radius: 50rpx;
+			}
+
+			.content-list {
+				width: 100%;
+				margin-left: 20rpx;
+				border-bottom: 1rpx solid #EEEEEE;
+				
+				.content {
+					font-size: 32rpx;
+				}
+
+				.time {
+					color: #999999;
+				}
+			}
+		}
+	}
 </style>

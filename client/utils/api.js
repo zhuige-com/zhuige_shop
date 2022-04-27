@@ -46,6 +46,23 @@ module.exports = {
 	 */
 	ZHUIGE_SHOP_GOODS_RECORD: makeURL('goods', 'record'),
 	
+	// ---------- 评论 ----------
+	
+	/**
+	 * 获取评论
+	 */
+	ZHUIGE_SHOP_COMMENT_INDEX: makeURL('comment', 'index'),
+	
+	/**
+	 * 添加评论
+	 */
+	ZHUIGE_SHOP_COMMENT_ADD: makeURL('comment', 'add'),
+	
+	/**
+	 * 删除评论
+	 */
+	ZHUIGE_SHOP_COMMENT_DELETE: makeURL('comment', 'delete'),
+	
 	// ---------- 配置 ----------
 	
 	/**

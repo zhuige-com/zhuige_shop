@@ -50,5 +50,17 @@ class ZhuiGe_Shop_Activator
             PRIMARY KEY (`id`)
         ) $charset_collate;";
         dbDelta($sql);
+
+        //待评论商品列表
+        $table_goods_comment = $wpdb->prefix . 'zhuige_shop_goods_comment';
+        $sql = "CREATE TABLE IF NOT EXISTS `$table_goods_comment` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+            `user_id` bigint(20) NOT NULL COMMENT '用户',
+            `order_id` bigint(20) NOT NULL COMMENT '订单',
+            `goods_id` bigint(20) NOT NULL COMMENT '商品',
+            `createtime` int(10) UNSIGNED DEFAULT NULL COMMENT '创建时间',
+            PRIMARY KEY (`id`)
+        ) $charset_collate;";
+        dbDelta($sql);
     }
 }

@@ -332,6 +332,6 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	@import "@/style/main.css";
 </style>

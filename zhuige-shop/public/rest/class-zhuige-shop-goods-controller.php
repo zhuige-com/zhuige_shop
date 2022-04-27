@@ -33,8 +33,8 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 	 */
 	public function get_last($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
-		$cat_id = $this->param_value($request, 'cat_id', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
+		$cat_id = (int)($this->param_value($request, 'cat_id', 0));
 
 		$args = [
 			'post_type' => ['jq_goods'],
@@ -74,7 +74,7 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 	 */
 	public function get_detail($request)
 	{
-		$post_id = $this->param_value($request, 'post_id');
+		$post_id = (int)($this->param_value($request, 'post_id'));
 		if (!$post_id) {
 			return $this->make_error('缺少参数');
 		}
@@ -161,7 +161,7 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 	 */
 	public function get_search($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 		$search = $this->param_value($request, 'search', '');
 
 		if (empty($search)) {

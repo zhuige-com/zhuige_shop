@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 追格商城小程序 v1.1.0
+	 * 追格商城小程序 v1.1.5
 	 * Author: 追格
 	 * Help document: https://www.zhuige.com
 	 * Copyright © 2022 www.zhuige.com All rights reserved.

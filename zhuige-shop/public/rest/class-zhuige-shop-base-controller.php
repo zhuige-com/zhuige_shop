@@ -64,7 +64,7 @@ class ZhuiGe_Shop_Base_Controller extends WP_REST_Controller
 	public function param_value($request, $param_name, $default_value = false)
 	{
 		if (isset($request[$param_name])) {
-			return $request[$param_name];
+			return sanitize_text_field(wp_unslash($request[$param_name]));
 		}
 
 		return $default_value;

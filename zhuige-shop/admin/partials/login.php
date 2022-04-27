@@ -15,7 +15,7 @@
 //
 CSF::createSection($prefix, array(
     'id' => 'my',
-    'title' => '登录',
+    'title' => '登录设置',
     'icon'  => 'fas fa-user-lock',
     'fields' => array(
 

@@ -42,7 +42,11 @@ function zhuige_shop_render_score_order() {
 		$order = [];
 		global $wpdb;
 		$table_score_order = $wpdb->prefix . 'zhuige_shop_user_order';
-		$order = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_score_order WHERE id=%d", $id), ARRAY_A);
+		$order = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM $table_score_order WHERE id=%d", $id
+			),
+		ARRAY_A);
 
 		if (isset($_POST['submit'])) {
 			$express_type = isset($_POST['express_type']) ? sanitize_text_field(wp_unslash($_POST['express_type'])) : '';

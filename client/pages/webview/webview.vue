@@ -14,14 +14,14 @@
 
 		onLoad(options) {
 			if (options.src) {
-				this.src = options.src;
+				this.src = decodeURIComponent(options.src);
 			}
 		},
 
 		onShareAppMessage() {
 			return {
 				title: getApp().globalData.appName,
-				path: 'pages/mix/webview/webview?src=' + this.src
+				path: 'pages/webview/webview?src=' + encodeURIComponent(this.src)
 			};
 		},
 
@@ -41,6 +41,6 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

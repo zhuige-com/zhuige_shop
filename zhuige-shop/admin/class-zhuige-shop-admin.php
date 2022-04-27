@@ -53,6 +53,7 @@ class ZhuiGe_Shop_Admin
 		require_once $base_dir . 'partials/home.php';
 		require_once $base_dir . 'partials/mine.php';
 		require_once $base_dir . 'partials/login.php';
+		require_once $base_dir . 'partials/goods.php';
 
 		//
         // 备份
@@ -66,6 +67,32 @@ class ZhuiGe_Shop_Admin
                 ),
             )
         ));
+
+		//过滤ID - 修复多选情况下 ID丢失造成的bug
+		function zhuige_shop_sanitize_ids($ids, $type='') {
+			if (!is_array($ids)) {
+				return $ids;
+			}
+
+			$ids_n = [];
+			foreach ($ids as $id) {
+				if (($type=='cat' && get_category($id))) {
+					$ids_n[] = $id;
+				} else if ($type=='post' || $type=='page') {
+					$post = get_post($id);
+					if ($post && $post->post_status == 'publish') {
+						$ids_n[] = $id;
+					}
+				}
+			}
+			return $ids_n;
+		}
+
+		function zhuige_shop_save_before( &$data, $option ) {
+			$data['home_rec']['goods_ids'] = zhuige_shop_sanitize_ids($data['home_rec']['goods_ids'], 'post');
+			return $data;
+		}
+		add_filter( 'csf_zhuige-shop_save', 'zhuige_shop_save_before', 10, 2 );
 
 		//追格商品属性
         $prefix_jq_goods_opts = 'zhuige-jq_goods-opt';
