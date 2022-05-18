@@ -48,7 +48,7 @@ PS：下载包中含前后端源代码！
 
 官网下载：[www.zhuige.com](https://www.zhuige.com/product/sc.html)
 
-gitee下载：[gitee.com/longwenjunj/zhuige_shop](https://gitee.com/longwenjunj/zhuige_shop)
+gitee下载：[gitee.com/zhuige_com/zhuige_shop](https://gitee.com/zhuige_com/zhuige_shop)
 
 
 ### 安装教程

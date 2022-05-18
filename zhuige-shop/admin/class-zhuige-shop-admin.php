@@ -4,8 +4,8 @@
  * 追格商城小程序
  * Author: 追格
  * Help document: https://www.zhuige.com/product/sc.html
- * github: https://github.com/longwenjunjie/zhuige_shop
- * gitee: https://gitee.com/longwenjunj/zhuige_shop
+ * github: https://github.com/zhuige-com/zhuige_shop
+ * gitee: https://gitee.com/zhuige_com/zhuige_shop
  * License：GPL-2.0
  * Copyright © 2022 www.zhuige.com All rights reserved.
  */
@@ -44,6 +44,7 @@ class ZhuiGe_Shop_Admin
 			'show_bar_menu' => false,
             'show_sub_menu' => false,
 			'footer_credit' => 'Thank you for creating with <a href="https://www.zhuige.com/" target="_blank">追格</a>',
+			'menu_icon' => 'dashicons-layout',
 		));
 
 		$base_dir = plugin_dir_path(__FILE__);

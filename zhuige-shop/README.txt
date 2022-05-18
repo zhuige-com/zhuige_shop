@@ -35,7 +35,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 官网下载：[www.zhuige.com](https://www.zhuige.com/product/sc.html)
 
-github下载：https://github.com/longwenjunjie/zhuige_shop
+github下载：https://github.com/zhuige-com/zhuige_shop
 
 
 == Screenshots ==
