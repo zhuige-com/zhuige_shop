@@ -52,6 +52,7 @@ class ZhuiGe_Shop_Admin
 		require_once $base_dir . 'partials/overview.php';
 		require_once $base_dir . 'partials/global.php';
 		require_once $base_dir . 'partials/home.php';
+		require_once $base_dir . 'partials/category.php';
 		require_once $base_dir . 'partials/mine.php';
 		require_once $base_dir . 'partials/login.php';
 		require_once $base_dir . 'partials/goods.php';

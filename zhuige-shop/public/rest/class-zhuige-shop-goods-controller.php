@@ -120,9 +120,11 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 			foreach ($cats as &$cat) {
 				if ($term->parent == $cat['id']) {
 
+					$sub_count = (int)(ZhuiGe_Shop::option_value('category_sub_count', 4));
+
 					$args = [
 						'post_type' => ['jq_goods'],
-						'posts_per_page' => 4,
+						'posts_per_page' => $sub_count,
 						'offset' => 0,
 						'orderby' => 'date',
 						'tax_query' => [

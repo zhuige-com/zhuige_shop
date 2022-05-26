@@ -5,7 +5,7 @@
 		<view v-if="goods && goods.slide && goods.slide.length>0" class="zhuige-detail-img">
 			<swiper indicator-dots="true" autoplay="autoplay" circular="ture" indicator-color="rgba(255,255,255, 0.3)"
 				indicator-active-color="rgba(255,255,255, 0.8)" interval="5000" duration="150" easing-function="linear">
-				<swiper-item v-for="(item, index) in goods.slide" :key="index">
+				<swiper-item v-for="(item, index) in goods.slide" :key="index" @click="showSlides(index)">
 					<image mode="aspectFill" :src="item.image.url"></image>
 				</swiper-item>
 			</swiper>
@@ -77,6 +77,16 @@
 </template>
 
 <script>
+	
+	/*
+	 * 追格商城小程序
+	 * 作者: 追格
+	 * 文档: https://www.zhuige.com/docs/sc.html
+	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
+	 * github: https://github.com/zhuige-com/zhuige_shop
+	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 */
+	
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -152,9 +162,17 @@
 				Util.openLink(link);
 			},
 
-			// clickAddCart(goods_id, count) {
-			// 	store.commit('cartGoodsAdd', {goods_id: goods_id, count: count});
-			// },
+			showSlides(index) {
+				let urls = [];
+				this.goods.slide.forEach(ele => {
+					urls.push(ele.image.url)
+				})
+				
+				uni.previewImage({
+					urls: urls,
+					current: index
+				})
+			},
 
 			clickCart() {
 				uni.switchTab({
