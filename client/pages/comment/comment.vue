@@ -1,6 +1,5 @@
 <template>
 	<view class="content-view">
-		<!-- <view v-if="goods">{{goods.title}}</view> -->
 		<uni-rate :size="36" v-model="rate" />
 		<textarea class="content" v-model="content" maxlength="140" confirm-type="done" />
 		<view class="footer">{{content.length}}/140</view>
@@ -26,10 +25,9 @@
 	
 	export default {
 		data() {
+			this.goods_id = 0;
+			
 			return {
-				goods_id: 0,
-				// goods: undefined,
-				
 				rate: 5,
 				content: '',
 			};
@@ -44,28 +42,15 @@
 			}
 			
 			this.goods_id = options.goods_id;
-			
-			// this.loadGoods();
 		},
 		
 		methods: {
-			// loadGoods() {
-			// 	Rest.post(Api.ZHUIGE_SHOP_GOODS_DETAIL, {
-			// 		post_id: this.goods_id
-			// 	}).then(res => {
-			// 		this.goods = res.data;
-			// 	}, err => {
-			// 		console.log(err)
-			// 	});
-			// }
-			
 			clickComment() {
 				Rest.post(Api.ZHUIGE_SHOP_COMMENT_ADD, {
 					post_id: this.goods_id,
 					content: this.content,
 					rate: this.rate
 				}).then(res => {
-					// console.log(res)
 					if (res.code != 0) {
 						Alert.toast(res.msg);
 					} else {

@@ -53,10 +53,10 @@
 
 	export default {
 		data() {
+			this.cat_id = undefined;
+			
 			return {
 				title: '商品列表',
-
-				cat_id: undefined,
 
 				goods_list: [],
 				loadMore: 'more',

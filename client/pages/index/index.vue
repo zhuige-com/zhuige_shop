@@ -121,10 +121,11 @@
 
 	export default {
 		data() {
+			this.share_thumb = undefined;
+			
 			return {
 				background: undefined,
-				share_thumb: undefined,
-
+				
 				slides: [],
 				icon_navs: [],
 				home_rec: undefined,

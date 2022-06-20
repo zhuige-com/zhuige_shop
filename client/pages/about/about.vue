@@ -22,8 +22,9 @@
 
 	export default {
 		data() {
+			this.page_id = '';
+			
 			return {
-				page_id: '',
 				post: undefined
 			}
 		},

@@ -128,8 +128,9 @@
 
 	export default {
 		data() {
+			this.order_id = undefined;
+			
 			return {
-				order_id: undefined,
 				order: undefined,
 			}
 		},

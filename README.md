@@ -97,7 +97,7 @@ gitee下载：[gitee.com/zhuige_com/zhuige_shop](https://gitee.com/zhuige_com/zh
 
 ### 特别鸣谢
 
-我们借助了开源的力量，才得以快速构建出追格积分商城小程序，在此特别感谢他们（排名不分先后）：
+我们借助了开源的力量，才得以快速构建出追格商城小程序，在此特别感谢他们（排名不分先后）：
 
 1. https://cn.wordpress.org
 
