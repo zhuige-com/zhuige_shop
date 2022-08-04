@@ -51,10 +51,12 @@
 					content: this.content,
 					rate: this.rate
 				}).then(res => {
-					if (res.code != 0) {
+					if (res.code == -11) {
+						Util.openLink('/pages/login/login?type=mobile');
+					} else if (res.code != 0) {
 						Alert.toast(res.msg);
 					} else {
-						Util.navigateBack()
+						Util.navigateBack();
 					}
 				}, err => {
 					console.log(err)

@@ -22,6 +22,7 @@ function zhuige_shop_manage_user_columns($columns)
 	$new_columns['cb'] = $columns['cb'];
 	$new_columns['username'] = $columns['username'];
 	$new_columns['jqnickname'] = '昵称';
+	$new_columns['jqmobile'] = '手机号';
 	$new_columns['jqscore'] = '追格积分';
 
 	unset($columns['cb']);
@@ -34,6 +35,8 @@ function zhuige_shop_manage_user_custom_columnns($value, $column_name, $user_id)
 {
 	if ('jqnickname' == $column_name) {
 		$value = get_user_meta($user_id, 'nickname', true);
+	} else if ('jqmobile' == $column_name) {
+		$value = get_user_meta($user_id, 'jiangqie_mobile', true);
 	} else if ('jqscore' == $column_name) {
 		$score = get_user_meta($user_id, 'zhuige_score', true);
 		if (!$score) {

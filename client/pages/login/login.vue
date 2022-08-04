@@ -3,23 +3,36 @@
 		<view class="zhuige-login">
 			<view class="zhuige-logo-set">
 				<image :src="logo" mode="aspectFit"></image>
-				<view>{{title}}</view>
+				<view v-if="login">{{title}}</view>
+				<view>绑定手机号后才能评论</view>
 			</view>
 			<view class="zhuige-login-btn">
 
-				<!-- #ifdef H5 -->
-				<view class="jiangqie-login-tip">H5平台尚未适配</view>
-				<!-- #endif -->
+				<template v-if="type=='login'">
+					<!-- #ifdef H5 -->
+					<view class="jiangqie-login-tip">H5平台尚未适配</view>
+					<!-- #endif -->
 
-				<!-- #ifdef MP-WEIXIN -->
-				<view v-if="code" @click="clickLogin()">授权登录</view>
-				<!-- #endif -->
+					<!-- #ifdef MP-WEIXIN -->
+					<view v-if="code" class="button" @click="clickLogin()">授权登录</view>
+					<!-- #endif -->
 
-				<!-- #ifdef MP-QQ || MP-BAIDU -->
-				<button v-if="code" open-type="getUserInfo" @getuserinfo="getuserinfo">授权登录</button>
-				<!-- #endif -->
+					<!-- #ifdef MP-QQ || MP-BAIDU -->
+					<button v-if="code" class="button" open-type="getUserInfo" @getuserinfo="getuserinfo">授权登录</button>
+					<!-- #endif -->
+				</template>
+				
+				<template v-if="type=='mobile'">
+					<!-- #ifdef MP-WEIXIN -->
+					<button v-if="code" class="button" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">绑定手机号</button>
+					<!-- #endif -->
+					
+					<!-- #ifndef MP-WEIXIN -->
+					该平台下的手机绑定功能暂未实现
+					<!-- #endif -->
+				</template>
 
-				<view @click="clickWalk()">随便逛逛</view>
+				<view class="button" @click="clickWalk()">随便逛逛</view>
 			</view>
 			<view class="zhuige-login-tips">
 				登录即同意
@@ -44,12 +57,15 @@
 	import Constant from '@/utils/constants';
 	import Auth from '@/utils/auth';
 	import Util from '@/utils/util';
+	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
 
 	export default {
 		data() {
 			return {
+				type: 'login',
+				
 				logo: '',
 				title: '',
 
@@ -61,10 +77,17 @@
 		},
 
 		onLoad(options) {
+			if (options.type) {
+				this.type = options.type;
+			}
+			
 			// #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU
 			uni.login({
 				success: (res) => {
 					this.code = res.code;
+				},
+				fail: (err) => {
+					console.log(err)
 				}
 			});
 			// #endif
@@ -135,6 +158,17 @@
 				}, err => {
 					console.log(err)
 				});
+			},
+			
+			getPhoneNumber(e) {
+				Rest.post(Api.ZHUIGE_SHOP_SET_MOBILE, {
+					encrypted_data: e.detail.encryptedData,
+					iv: e.detail.iv,
+					code: this.code,
+				}).then(res => {
+					Alert.toast(res.msg)
+					Util.navigateBack();
+				})
 			}
 		}
 	}
@@ -173,7 +207,7 @@
 		bottom: 180rpx;
 	}
 
-	.zhuige-login-btn view {
+	.zhuige-login-btn .button {
 		height: 90rpx;
 		line-height: 90rpx;
 		font-size: 28rpx;

@@ -40,10 +40,6 @@ class ZhuiGe_Shop_Comment_Controller extends ZhuiGe_Shop_Base_Controller
 
 		$comments = $this->get_comments($post_id, $my_user_id, 0, $offset);
 
-		// foreach ($comments as &$comment) {
-		// 	$comment['replys'] = $this->get_comments($post_id, $my_user_id, $comment['id']);
-		// }
-
 		return $this->make_success([
 			'comments' => $comments,
 			'more' => (count($comments) >= ZhuiGe_Shop::POSTS_PER_PAGE ? 'more' : 'nomore')
@@ -62,6 +58,13 @@ class ZhuiGe_Shop_Comment_Controller extends ZhuiGe_Shop_Base_Controller
 
 		if (!ZhuiGe_Shop::option_value('switch_comment')) {
 			return $this->make_error('评论功能未开启');
+		}
+
+		if (ZhuiGe_Shop::option_value('switch_comment_mobile')) {
+			$mobile = get_user_meta($my_user_id, 'jiangqie_mobile', true);
+			if (empty($mobile)) {
+				return $this->make_error('还没有绑定手机号', -11);
+			}
 		}
 
 		$post_id = (int)($this->param_value($request, 'post_id', 0));

@@ -88,6 +88,11 @@ module.exports = {
 	ZHUIGE_SHOP_USER_LOGIN: makeURL('user', 'login'),
 	
 	/**
+	 * 设置手机号
+	 */
+	ZHUIGE_SHOP_SET_MOBILE: makeURL('user', 'set_mobile'),
+	
+	/**
 	 * 注销
 	 */
 	ZHUIGE_SHOP_USER_LOGOUT: makeURL('user', 'logout'),

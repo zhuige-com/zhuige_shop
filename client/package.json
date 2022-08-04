@@ -1,7 +1,7 @@
 {
 	"id": "zhuige-shop",
 	"name": "追格商城小程序",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"description": "追格商城小程序是基于WordPress和uni-app开发的多平台（支持微信小程序、H5网页、百度小程序、头条小程序等）购物商城系统，所有源代码无加密、无后门，简单配置即可发布！",
 	"keywords": [
         "商城",
@@ -12,12 +12,8 @@
 	"engines": {
 		"HBuilderX": "^3.2.16"
 	},
-	"dcloudext": {
-		"category": [
-			"前端页面模板",
-			"uni-app前端项目模板"
-		],
-		"sale": {
+    "dcloudext": {
+        "sale": {
 			"regular": {
 				"price": "0.00"
 			},
@@ -33,7 +29,8 @@
 			"data": "无",
 			"permissions": "无"
 		},
-		"npmurl": ""
+        "npmurl": "",
+        "type": "uniapp-template-project"
 	},
 	"uni_modules": {
 	        "platforms": {
