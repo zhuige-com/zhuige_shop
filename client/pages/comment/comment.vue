@@ -85,6 +85,9 @@
 		
 		.button {
 			margin-top: 20rpx;
+			border: none;
+			background: #ff4400;
+			color: #FFFFFF;
 		}
 	}
 </style>

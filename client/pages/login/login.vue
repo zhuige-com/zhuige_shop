@@ -191,6 +191,7 @@
 	.zhuige-logo-set image {
 		height: 200rpx;
 		width: 200rpx;
+		border-radius: 50%;
 	}
 
 	.zhuige-logo-set view {

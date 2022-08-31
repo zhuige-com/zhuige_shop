@@ -633,7 +633,7 @@
 				height: 50rpx;
 				line-height: 50rpx;
 				border-radius: 6rpx;
-				border: 1rpx solid #EEEEEE;
+				border: 1px solid #DDDDDD;
 			}
 			.list-setup .list-setup-opt text {
 				width: 50rpx;
@@ -643,8 +643,8 @@
 				width: 60rpx;
 				text-align: center;
 				height: 50rpx;
-				border-left: 1rpx solid #EEEEEE; 
-				border-right: 1rpx solid #EEEEEE; 
+				border-left: 1px solid #DDDDDD; 
+				border-right: 1px solid #DDDDDD; 
 			}
 
 .zhuige-cart-count {
@@ -825,6 +825,7 @@
 	.zhuige-icon image {
 		height: 72rpx;
 		width: 72rpx;
+		margin-bottom: -8rpx;
 	}
 	.zhuige-icon view {
 		font-size: 26rpx;
@@ -853,11 +854,11 @@
 	}
 	.zhuige-user-opt-title {
 		display: flex;
-		align-items: center;		
+		align-items: center;	
 	}
 	.zhuige-user-opt-title view {
 		font-size: 30rpx;
-		font-weight: 300;
+		font-weight: 400;
 		color: #333333;
 		margin-right: 20rpx;
 	}

@@ -66,6 +66,7 @@
 
 	.zhuige-single-page {
 		padding: 40rpx;
+		line-height: 2.2em;
 	}
 
 	.zhuige-single-page view {
