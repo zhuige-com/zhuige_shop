@@ -57,6 +57,67 @@ function request(url, data = {}, method = "GET") {
 	});
 }
 
+
+/**
+ * 上传图片
+ */
+function upload(url, path, data = {}) {
+    return new Promise(function (resolve, reject) {
+        uni.showLoading({
+            title: '上传中……',
+        })
+
+        data.token = Auth.getToken();
+		
+		// #ifdef MP-WEIXIN
+		data.os = 'wx';
+		// #endif
+		
+		// #ifdef MP-BAIDU
+		data.os = 'bd';
+		// #endif
+		
+		// #ifdef MP-QQ
+		data.os = 'qq';
+		// #endif
+        
+        uni.uploadFile({
+            url: url,
+            filePath: path,
+            name: 'image',
+            formData: data,
+            success(res) {
+                if (res.statusCode != 200) {
+                    reject(res.errMsg);
+                    return;
+                }
+
+				let data = undefined;
+				if (res.data instanceof String || (typeof res.data).toLowerCase() == 'string') {
+					data = JSON.parse(res.data);
+				} else {
+					data = res.data;
+				}
+                
+                if (data.code == -1) { //尚未登录
+                    uni.navigateTo({
+                        url: '/pages/login/login',
+                    });
+                    return;
+                }
+
+                resolve(data);
+            }, 
+			fail(err) {
+				console.log(err)
+			},
+			complete() {
+				uni.hideLoading();
+			}
+        })
+    });
+}
+
 /**
  * get请求
  */
@@ -74,4 +135,5 @@ function post(url, data = {}) {
 module.exports = {
 	get,
 	post,
+	upload,
 };

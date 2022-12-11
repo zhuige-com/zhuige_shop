@@ -162,10 +162,10 @@
 
 			clickAvatar() {
 				if (this.user) {
-					return;
+					Util.openLink('/pages/verify/verify');
+				} else {
+					Util.openLink('/pages/login/login');
 				}
-
-				Util.openLink('/pages/login/login');
 			},
 
 			clickOrder(tab) {

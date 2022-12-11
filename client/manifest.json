@@ -2,7 +2,7 @@
     "name" : "client",
     "appid" : "",
     "description" : "",
-    "versionName" : "1.2.1",
+    "versionName" : "1.2.5",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -47,7 +47,7 @@
             "urlCheck" : false
         },
         "usingComponents" : true,
-		"requiredPrivateInfos": ["chooseAddress"]
+        "requiredPrivateInfos" : [ "chooseAddress" ]
     },
     "mp-alipay" : {
         "usingComponents" : true

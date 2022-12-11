@@ -20,6 +20,8 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 			'login' => 'user_login',
 			'logout' => 'user_logout',
 			'set_mobile' => 'set_mobile',
+
+			'set_info' => 'set_info',
 		];
 	}
 
@@ -30,9 +32,12 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 	{
 		$code = $this->param_value($request, 'code', '');
 		$nickname = $this->param_value($request, 'nickname', '');
-		$avatar = $this->param_value($request, 'avatar', '');
+		// $avatar = $this->param_value($request, 'avatar', '');
 		$channel = $this->param_value($request, 'channel', '');
-		if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
+		// if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
+		// 	return $this->make_error('缺少参数');
+		// }
+		if (empty($code) || empty($nickname) || empty($channel)) {
 			return $this->make_error('缺少参数');
 		}
 
@@ -46,8 +51,10 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		$user = get_user_by('login', $session['openid']);
+		$first = 0;
 		if ($user) {
 			$user_id = $user->ID;
+			$nickname = get_user_meta($user->ID, 'nickname', true);
 		} else {
 			$email_domain = '@zhuige.com';
 			$user_id = wp_insert_user([
@@ -63,6 +70,8 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 			if (is_wp_error($user_id)) {
 				return $this->make_error('创建用户失败');
 			}
+
+			$first = 1;
 		}
 		
 		update_user_meta($user_id, 'jq_channel', $channel);
@@ -75,17 +84,21 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 			update_user_meta($user_id, 'jq_unionid', $session['unionid']);
 		}
 
-		update_user_meta($user_id, 'zhuige_avatar', $avatar);
+		// update_user_meta($user_id, 'zhuige_avatar', $avatar);
 
 		$zhuige_token = $this->_generate_token();
 		update_user_meta($user_id, 'zhuige_token', $zhuige_token);
 
-		$user = array(
+		$user = [
 			'user_id' => $user_id,
 			'nickname' => $nickname,
-			'avatar' => $avatar,
+			'avatar' => ZhuiGe_Shop::user_avatar($user_id),
 			'token' => $zhuige_token,
-		);
+		];
+
+		if ($first) {
+			$user['first'] = $first;
+		}
 
 		return $this->make_success($user);
 	}
@@ -155,6 +168,33 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		update_user_meta($user_id, 'jiangqie_mobile', $mobile);
 
 		return $this->make_success($mobile);
+	}
+
+	/**
+	 * 设置用户信息
+	 */
+	public function set_info($request)
+	{
+		$user_id = get_current_user_id();
+		if (!$user_id) {
+			return $this->make_error('还没有登陆', -1);
+		}
+
+		$avatar = $this->param_value($request, 'avatar', '');
+		$nickname = $this->param_value($request, 'nickname', '');
+		if(!$this->msg_sec_check($nickname)) {
+			return $this->make_error('请勿发布敏感信息');
+		}
+
+		if (!empty($nickname)) {
+			update_user_meta($user_id, 'nickname', $nickname);
+		}
+
+		if (!empty($avatar)) {
+			update_user_meta($user_id, 'zhuige_avatar', $avatar);
+		}
+
+		return $this->make_success();
 	}
 
 	/**

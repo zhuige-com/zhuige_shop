@@ -153,6 +153,7 @@ class ZhuiGe_Shop
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-user-controller.php';
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-goods-controller.php';
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-order-controller.php';
+		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-other-controller.php';
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-comment-controller.php';
 
 		/**
@@ -206,6 +207,7 @@ class ZhuiGe_Shop
 			new ZhuiGe_Shop_User_Controller(),
 			new ZhuiGe_Shop_Goods_Controller(),
 			new ZhuiGe_Shop_Order_Controller(),
+			new ZhuiGe_Shop_Other_Controller(),
 			new ZhuiGe_Shop_Comment_Controller(),
 		];
 		foreach ($controller as $control) {

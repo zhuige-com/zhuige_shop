@@ -75,6 +75,12 @@
 			"navigationBarTitleText": "评论",
 			"enablePullDownRefresh": false
 		}
+	}, {
+		"path": "pages/verify/verify",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

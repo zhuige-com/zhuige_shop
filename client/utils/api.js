@@ -97,6 +97,11 @@ module.exports = {
 	 */
 	ZHUIGE_SHOP_USER_LOGOUT: makeURL('user', 'logout'),
 	
+	/**
+	 * 设置用户信息
+	 */
+	ZHUIGE_SHOP_USER_SET_INFO: makeURL('user', 'set_info'),
+	
 	// ---------- 订单 ----------
 	
 	/**
@@ -138,5 +143,10 @@ module.exports = {
 	 * 订单统计
 	 */
 	ZHUIGE_SHOP_ORDER_COUNT: makeURL('order', 'count'),
+	
+	/**
+	 * 上传图片
+	 */
+	ZHUIGE_SHOP_OTHER_UPLOAD: makeURL('other', 'upload'),
 	
 };

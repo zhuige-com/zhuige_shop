@@ -1,7 +1,7 @@
 <script>
 	
 	/*
-	 * 追格商城小程序 v1.2.1
+	 * 追格商城小程序 v1.2.5
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
