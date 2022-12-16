@@ -199,18 +199,18 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 		$action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : '';
 		if ('bulk_delete' == $action) {
 			if (isset($_GET['order_ids'])) {
-				$order_ids = sanitize_text_field(wp_unslash($_GET['order_ids']));
+				// $order_ids = sanitize_text_field(wp_unslash($_GET['order_ids']));
+				$order_ids = $_GET['order_ids'];
+				$order_ids = implode(',', $order_ids);
 
 				global $wpdb;
-				foreach ($order_ids as $order_id) {
-					$wpdb->delete("{$wpdb->prefix}zhuige_shop_user_order", ['id' => $order_id], ['%d']);
-				}
+				$wpdb->query("DELETE FROM {$wpdb->prefix}zhuige_shop_user_order WHERE id IN ($order_ids)");
 			}
 
-			$page = wp_unslash($_REQUEST['page']);
-			$query = ['page' => $page];
-			$redirect = add_query_arg($query, admin_url('admin.php'));
-			echo '<script>window.location.href="' . esc_url($redirect) . '"</script>';
+			// $page = wp_unslash($_REQUEST['page']);
+			// $query = ['page' => $page];
+			// $redirect = add_query_arg($query, admin_url('admin.php'));
+			// echo '<script>window.location.href="' . esc_url($redirect) . '"</script>';
 		}
 	}
 
