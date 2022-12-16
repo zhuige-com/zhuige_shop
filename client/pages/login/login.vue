@@ -4,7 +4,7 @@
 			<view class="zhuige-logo-set">
 				<image :src="logo" mode="aspectFit"></image>
 				<view v-if="login">{{title}}</view>
-				<view>绑定手机号后才能评论</view>
+				<view v-if="type=='mobile'">绑定手机号后才能评论</view>
 			</view>
 			<view class="zhuige-login-btn">
 
