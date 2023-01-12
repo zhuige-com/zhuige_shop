@@ -84,7 +84,7 @@
 					<text>{{order.express_no}}</text>
 				</view>
 			</view>
-			
+
 			<view class="zhuige-order-button">
 				<template v-if="order.paytime">
 					<template v-if="order.confirmtime">
@@ -111,16 +111,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -129,7 +128,7 @@
 	export default {
 		data() {
 			this.order_id = undefined;
-			
+
 			return {
 				order: undefined,
 			}
@@ -144,7 +143,7 @@
 
 			this.loadData();
 		},
-		
+
 		onPullDownRefresh() {
 			this.loadData();
 		},
@@ -157,6 +156,9 @@
 		},
 
 		methods: {
+			/**
+			 * 点击 确定订单
+			 */
 			clickConfirm() {
 				uni.showModal({
 					title: '提示',
@@ -165,7 +167,7 @@
 						if (!res.confirm) {
 							return;
 						}
-						
+
 						Rest.post(Api.ZHUIGE_SHOP_ORDER_CONFIRM, {
 							order_id: this.order_id
 						}).then(res => {
@@ -180,7 +182,10 @@
 					}
 				});
 			},
-			
+
+			/**
+			 * 点击 取消订单
+			 */
 			clickCancel() {
 				uni.showModal({
 					title: '提示',
@@ -189,7 +194,7 @@
 						if (!res.confirm) {
 							return;
 						}
-						
+
 						Rest.post(Api.ZHUIGE_SHOP_ORDER_CANCEL, {
 							order_id: this.order_id
 						}).then(res => {
@@ -204,7 +209,10 @@
 					}
 				});
 			},
-			
+
+			/**
+			 * 点击 删除订单
+			 */
 			clickDelete() {
 				uni.showModal({
 					title: '提示',
@@ -213,7 +221,7 @@
 						if (!res.confirm) {
 							return;
 						}
-						
+
 						Rest.post(Api.ZHUIGE_SHOP_ORDER_DELETE, {
 							order_id: this.order_id
 						}).then(res => {
@@ -228,7 +236,10 @@
 					}
 				});
 			},
-			
+
+			/**
+			 * 点击 支付
+			 */
 			clickPay() {
 				Rest.post(Api.ZHUIGE_SHOP_ORDER_PAY, {
 					order_id: this.order_id
@@ -236,7 +247,7 @@
 					if (res.code == 0) {
 						// #ifdef MP-WEIXIN
 						let pay_params = res.data.pay_params;
-				
+
 						// 发起微信支付
 						wx.requestPayment({
 							timeStamp: pay_params.timeStamp,
@@ -246,7 +257,7 @@
 							paySign: pay_params.paySign,
 							success: res3 => {
 								Alert.toast('支付成功');
-								
+
 								setTimeout(() => {
 									this.loadData();
 								}, 1000);
@@ -256,7 +267,7 @@
 							},
 						});
 						// #endif
-				
+
 						// #ifndef MP-WEIXIN
 						Alert.toast('平台暂不支持');
 						// #endif
@@ -267,7 +278,10 @@
 					console.log(err)
 				});
 			},
-			
+
+			/**
+			 * 加载订单详情
+			 */
 			loadData() {
 				Rest.post(Api.ZHUIGE_SHOP_ORDER_DETAIL, {
 					order_id: this.order_id

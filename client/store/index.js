@@ -19,36 +19,36 @@ const store = new Vuex.Store({
 			state.cart.forEach((item, index) => {
 				count += parseInt(item.count);
 			})
-			
+
 			return count;
 		},
-		
+
 		/**
 		 * 是否全选 - 购买
 		 */
 		getCheckBuyAll(state) {
-			for (let i=0; i<state.cart.length; i++) {
+			for (let i = 0; i < state.cart.length; i++) {
 				if (state.cart[i].check_buy == 0) {
 					return false;
 				}
 			}
-			
+
 			return true;
 		},
-		
+
 		/**
 		 * 是否全选 - 管理
 		 */
 		getCheckDelAll(state) {
-			for (let i=0; i<state.cart.length; i++) {
+			for (let i = 0; i < state.cart.length; i++) {
 				if (state.cart[i].check_del == 0) {
 					return false;
 				}
 			}
-			
+
 			return true;
 		},
-		
+
 		/**
 		 * 选中的数量 - 购买
 		 */
@@ -59,10 +59,10 @@ const store = new Vuex.Store({
 					count += item.count;
 				}
 			})
-			
+
 			return count;
 		},
-		
+
 		/**
 		 * 选中的数量 - 管理
 		 */
@@ -73,10 +73,10 @@ const store = new Vuex.Store({
 					count += item.count;
 				}
 			})
-			
+
 			return count;
 		},
-		
+
 		/**
 		 * 所有的商品ID
 		 */
@@ -85,10 +85,10 @@ const store = new Vuex.Store({
 			state.cart.forEach((item, index) => {
 				ids.push(item.id);
 			})
-			
+
 			return ids;
 		},
-		
+
 		/**
 		 * 选中的商品 - 购买
 		 */
@@ -99,10 +99,10 @@ const store = new Vuex.Store({
 					ids.push(item.id);
 				}
 			})
-			
+
 			return ids;
 		},
-		
+
 		/**
 		 * 选中的商品 - 管理
 		 */
@@ -113,10 +113,10 @@ const store = new Vuex.Store({
 		// 			ids.push(item.id);
 		// 		}
 		// 	})
-			
+
 		// 	return ids;
 		// },
-		
+
 		/**
 		 * 选中的商品 - 金额
 		 */
@@ -129,7 +129,7 @@ const store = new Vuex.Store({
 					}
 				}
 			})
-			
+
 			return amount;
 		},
 	},
@@ -141,7 +141,7 @@ const store = new Vuex.Store({
 		cartSet(state, cart) {
 			state.cart = cart;
 		},
-		
+
 		/**
 		 * 增加商品数量
 		 */
@@ -163,7 +163,7 @@ const store = new Vuex.Store({
 					check_del: 0,
 				})
 			}
-			
+
 			Util.saveCart(state.cart);
 		},
 
@@ -179,10 +179,10 @@ const store = new Vuex.Store({
 					}
 				}
 			})
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 设置商品的数量
 		 */
@@ -192,7 +192,7 @@ const store = new Vuex.Store({
 					item.count = payload.count;
 				}
 			})
-			
+
 			Util.saveCart(state.cart);
 		},
 
@@ -207,10 +207,10 @@ const store = new Vuex.Store({
 				}
 			})
 			state.cart = ncart;
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 删除已提交订单的商品
 		 */
@@ -222,10 +222,10 @@ const store = new Vuex.Store({
 				}
 			})
 			state.cart = ncart;
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 删除选中的商品
 		 */
@@ -237,7 +237,7 @@ const store = new Vuex.Store({
 				}
 			})
 			state.cart = ncart;
-			
+
 			Util.saveCart(state.cart);
 		},
 
@@ -248,7 +248,7 @@ const store = new Vuex.Store({
 		// 	state.cart = [];
 		//  Util.saveCart(state.cart);
 		// },
-		
+
 		/**
 		 * 全选 - 购买
 		 */
@@ -256,10 +256,10 @@ const store = new Vuex.Store({
 			state.cart.forEach((item, index) => {
 				item.check_buy = payload.check;
 			})
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 全选 - 管理
 		 */
@@ -267,17 +267,17 @@ const store = new Vuex.Store({
 			state.cart.forEach((item, index) => {
 				item.check_del = payload.check;
 			})
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 设置商品
 		 */
 		cartSetGoodsList(state, payload) {
 			let cart = payload.list;
-			for (let i=0; i<cart.length; i++) {
-				for (let j=0; j<state.cart.length; j++) {
+			for (let i = 0; i < cart.length; i++) {
+				for (let j = 0; j < state.cart.length; j++) {
 					if (state.cart[j].id == cart[i].id) {
 						cart[i].count = state.cart[j].count;
 						cart[i].check_buy = state.cart[j].check_buy;
@@ -286,33 +286,33 @@ const store = new Vuex.Store({
 				}
 			}
 			state.cart = cart;
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 设置商品选中状态 - 购买
 		 */
 		cartSetGoodsCheckBuy(state, payload) {
-			for (let j=0; j<state.cart.length; j++) {
+			for (let j = 0; j < state.cart.length; j++) {
 				if (state.cart[j].id == payload.goods_id) {
 					state.cart[j].check_buy = (state.cart[j].check_buy == 1 ? 0 : 1);
 				}
 			}
-			
+
 			Util.saveCart(state.cart);
 		},
-		
+
 		/**
 		 * 设置商品选中状态 - 管理
 		 */
 		cartSetGoodsCheckDel(state, payload) {
-			for (let j=0; j<state.cart.length; j++) {
+			for (let j = 0; j < state.cart.length; j++) {
 				if (state.cart[j].id == payload.goods_id) {
 					state.cart[j].check_del = (state.cart[j].check_del == 1 ? 0 : 1);
 				}
 			}
-			
+
 			Util.saveCart(state.cart);
 		},
 	},

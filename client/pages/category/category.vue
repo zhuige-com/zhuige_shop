@@ -20,7 +20,7 @@
 
 						<view class="zhuige-category-group">
 							<view v-for="(goods,ginx) in subcat.list" :key="ginx" class="zhuige-category-block"
-							@click="clickLink('/pages/detail/detail?goods_id=' + goods.id)">
+								@click="clickLink('/pages/detail/detail?goods_id=' + goods.id)">
 								<image :src="goods.thumbnail" mode="aspectFill"></image>
 								<view class="zhuige-category-goods">
 									<view class="goods-name">{{goods.title}}</view>
@@ -47,16 +47,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -74,7 +73,7 @@
 				cur_cat_id: undefined
 			}
 		},
-		
+
 		computed: {
 			...mapGetters([
 				'getCartCount'
@@ -91,7 +90,7 @@
 				console.log(err)
 			});
 		},
-		
+
 		onShow() {
 			Util.updateCartBadge(this.getCartCount);
 		},
@@ -104,14 +103,20 @@
 		},
 
 		methods: {
+			/**
+			 * 点击打开链接
+			 */
 			clickLink(link) {
 				Util.openLink(link);
 			},
 
+			/**
+			 * 点击分类
+			 */
 			clickTopCat(cat_id) {
 				this.cur_cat_id = cat_id;
 			},
-			
+
 			/**
 			 * 添加商品数量
 			 */
@@ -120,7 +125,7 @@
 					goods_id: goods_id,
 					count: count
 				});
-				
+
 				Util.updateCartBadge(this.getCartCount);
 			},
 		}

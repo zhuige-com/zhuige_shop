@@ -8,31 +8,30 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
-	
+
 	export default {
 		data() {
 			this.goods_id = 0;
-			
+
 			return {
 				rate: 5,
 				content: '',
 			};
 		},
-		
+
 		onLoad(options) {
 			if (!options.goods_id) {
 				uni.reLaunch({
@@ -40,11 +39,14 @@
 				})
 				return;
 			}
-			
+
 			this.goods_id = options.goods_id;
 		},
-		
+
 		methods: {
+			/**
+			 * 提交评论
+			 */
 			clickComment() {
 				Rest.post(Api.ZHUIGE_SHOP_COMMENT_ADD, {
 					post_id: this.goods_id,
@@ -82,7 +84,7 @@
 		.footer {
 			text-align: end;
 		}
-		
+
 		.button {
 			margin-top: 20rpx;
 			border: none;

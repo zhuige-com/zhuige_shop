@@ -21,16 +21,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Constant from '@/utils/constants';
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
@@ -63,18 +62,30 @@
 		},
 
 		methods: {
+			/**
+			 * 点击 搜索
+			 */
 			clickSearch() {
 				this.search(this.keyword)
 			},
 
+			/**
+			 *确认 搜索
+			 */
 			confirmSearch() {
 				this.search(this.keyword)
 			},
 
+			/**
+			 * 点击 搜索历史
+			 */
 			clickHistory(keyword) {
 				this.search(keyword)
 			},
 
+			/**
+			 * 点击 清除历史
+			 */
 			clickClear() {
 				let that = this;
 				uni.showModal({
@@ -94,10 +105,16 @@
 				});
 			},
 
+			/**
+			 * 点击 取消
+			 */
 			clickCancel() {
 				Util.navigateBack()
 			},
 
+			/**
+			 * 搜索
+			 */
 			search(keyword) {
 				uni.getStorage({
 					key: Constant.ZHUIGE_SEARCH_KEY,

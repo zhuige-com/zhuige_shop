@@ -20,7 +20,6 @@
 			<!-- 底部大按钮 -->
 			<view class="zhuige-verify-button">
 				<view @click="clickSubmit">提交</view>
-				<!-- <view @click="openLink('')">完善详细资料</view> -->
 				<view @click="clickBack">跳过</view>
 			</view>
 		</view>
@@ -29,12 +28,21 @@
 </template>
 
 <script>
+	/*
+	 * 追格商城小程序
+	 * 作者: 追格
+	 * 文档: https://www.zhuige.com/docs/sc.html
+	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
+	 * github: https://github.com/zhuige-com/zhuige_shop
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
+	 */
+	
 	import Util from '@/utils/util';
 	import Auth from '@/utils/auth';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
-	
+
 	export default {
 		data() {
 			return {
@@ -42,7 +50,7 @@
 				avatar: '/static/images/default/avatar.jpg'
 			}
 		},
-		
+
 		onLoad(options) {
 			let user = Auth.getUser();
 			if (user) {
@@ -52,7 +60,7 @@
 				}
 			}
 		},
-		
+
 		methods: {
 			/**
 			 * 点击打开链接
@@ -60,7 +68,7 @@
 			openLink(link) {
 				Util.openLink(link);
 			},
-			
+
 			/**
 			 * 选择头像
 			 */
@@ -71,7 +79,7 @@
 					Alert.error(err);
 				});
 			},
-			
+
 			/**
 			 * 点击提交
 			 */
@@ -82,12 +90,12 @@
 				}).then(res => {
 					if (res.code == 0) {
 						Alert.success(res.msg);
-						
+
 						let user = Auth.getUser();
 						user.nickname = this.nickname;
 						user.avatar = this.avatar;
 						Auth.setUser(user);
-						
+
 						setTimeout(() => {
 							Util.navigateBack();
 						}, 1500)
@@ -98,7 +106,7 @@
 					console.log(err)
 				});
 			},
-			
+
 			/**
 			 * 点击返回
 			 */
@@ -130,7 +138,9 @@
 	.zhuige-verify-info {
 		padding-bottom: 80rpx;
 	}
-	.zhuige-verify-info button, .zhuige-verify-info button::after {
+
+	.zhuige-verify-info button,
+	.zhuige-verify-info button::after {
 		border: none;
 		background: none;
 	}

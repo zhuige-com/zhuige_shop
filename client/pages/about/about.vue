@@ -7,23 +7,22 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
 
 	export default {
 		data() {
 			this.page_id = '';
-			
+
 			return {
 				post: undefined
 			}
@@ -49,7 +48,7 @@
 				path: 'pages/page/page?page_id=' + this.page_id
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline() {
 			return {

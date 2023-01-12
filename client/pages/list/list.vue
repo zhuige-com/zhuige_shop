@@ -35,16 +35,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -54,7 +53,7 @@
 	export default {
 		data() {
 			this.cat_id = undefined;
-			
+
 			return {
 				title: '商品列表',
 
@@ -92,13 +91,13 @@
 
 		onShareAppMessage() {
 			let path = 'pages/list/list?title=' + this.title;
-			
+
 			if (this.cat_id) {
 				path = path + '&cat_id=' + this.cat_id;
 			} else if (this.search) {
 				path = path + '&search=' + this.search;
 			}
-			
+
 			return {
 				title: this.title + '_' + getApp().globalData.appName,
 				path: path
@@ -106,10 +105,16 @@
 		},
 
 		methods: {
+			/**
+			 * 点击打开链接
+			 */
 			clickLink(link) {
 				Util.openLink(link);
 			},
-			
+
+			/**
+			 * 加载商品列表
+			 */
 			loadGoods() {
 				if (this.loadMore == 'loading') {
 					return;

@@ -78,16 +78,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -179,10 +178,16 @@
 		},
 
 		methods: {
+			/**
+			 * 点击 打开链接
+			 */
 			clickLink(link) {
 				Util.openLink(link);
 			},
 
+			/**
+			 * 点击 选择地址
+			 */
 			clickAddress() {
 				uni.chooseAddress({
 					success: res => {
@@ -196,6 +201,9 @@
 				})
 			},
 
+			/**
+			 * 点击 提交订单
+			 */
 			clickOrderSubmit() {
 				if (!this.address) {
 					Alert.toast('请选择地址');

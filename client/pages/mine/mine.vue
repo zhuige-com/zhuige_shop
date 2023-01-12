@@ -89,16 +89,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Auth from '@/utils/auth';
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
@@ -156,10 +155,16 @@
 		},
 
 		methods: {
+			/**
+			 * 点击 打开链接
+			 */
 			clickLink(link) {
 				Util.openLink(link);
 			},
 
+			/**
+			 * 点击 头像
+			 */
 			clickAvatar() {
 				if (this.user) {
 					Util.openLink('/pages/verify/verify');
@@ -168,14 +173,23 @@
 				}
 			},
 
+			/**
+			 * 点击 订单管理
+			 */
 			clickOrder(tab) {
 				Util.openLink('/pages/order_manage/order_manage?tab=' + tab);
 			},
 
+			/**
+			 * 点击 关于
+			 */
 			clickAbout() {
 				Util.openLink(this.page_about);
 			},
 
+			/**
+			 * 点击 清楚缓存
+			 */
 			clickClear() {
 				uni.showModal({
 					title: '提示',

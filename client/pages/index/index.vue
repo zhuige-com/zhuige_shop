@@ -1,7 +1,7 @@
 <template>
 	<view class="content"
 		:style="background ? 'background: url(' + background + ') no-repeat top; background-size: 100% auto;' : ''">
-		
+
 		<uni-nav-bar title="首页" :fixed="true" :statusBar="true" :placeholder="false">
 			<!-- 顶部小搜索框 -->
 			<view slot="left" @click="clickLink('/pages/search/search')">
@@ -100,16 +100,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -122,10 +121,10 @@
 	export default {
 		data() {
 			this.share_thumb = undefined;
-			
+
 			return {
 				background: undefined,
-				
+
 				slides: [],
 				icon_navs: [],
 				home_rec: undefined,
@@ -190,6 +189,9 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 刷新
+			 */
 			refresh() {
 				this.loadSetting();
 
@@ -198,10 +200,16 @@
 				this.loadGoods();
 			},
 
+			/**
+			 * 点击打开链接
+			 */
 			clickLink(link) {
 				Util.openLink(link);
 			},
 
+			/**
+			 * 点击切换TAB
+			 */
 			clickTab(cat_id) {
 				this.cat_id = cat_id;
 
@@ -210,12 +218,18 @@
 				this.loadGoods();
 			},
 
+			/**
+			 * 打开分类
+			 */
 			clickCategory() {
 				uni.switchTab({
 					url: '/pages/category/category'
 				})
 			},
 
+			/**
+			 * 加载配置
+			 */
 			loadSetting() {
 				Rest.post(Api.ZHUIGE_SHOP_SETTING_HOME).then(res => {
 					getApp().globalData.appName = res.data.title;
@@ -237,6 +251,9 @@
 				});
 			},
 
+			/**
+			 * 加载商品列表
+			 */
 			loadGoods() {
 				if (this.loadMore == 'loading') {
 					return;

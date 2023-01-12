@@ -37,7 +37,7 @@ function loadCart() {
 function navigateBack() {
 	uni.navigateBack({
 		delta: 1,
-		fail: function (res) {
+		fail: function(res) {
 			uni.redirectTo({
 				url: '/pages/index/index'
 			});
@@ -89,7 +89,7 @@ function openLink(link) {
 	if (!link) {
 		return;
 	}
-	
+
 	link = htmlRestore(link);
 
 	if (link.startsWith('/pages/')) {
@@ -113,7 +113,7 @@ function openLink(link) {
 				}
 			}
 		}
-		
+
 		uni.navigateTo({
 			url: link,
 			fail: () => {
@@ -175,14 +175,14 @@ function openLink(link) {
 					});
 				}
 			};
-			
+
 			if (feedId != '') {
 				params.feedId = feedId;
 				wx.openChannelsActivity(params);
 			} else {
 				wx.openChannelsUserProfile(params);
 			}
-			
+
 			return;
 		}
 		// #endif
@@ -203,7 +203,7 @@ module.exports = {
 	updateCartBadge,
 	saveCart,
 	loadCart,
-	
+
 	navigateBack,
 	openLink,
 };

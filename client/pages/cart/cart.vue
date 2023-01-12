@@ -28,7 +28,8 @@
 							</view>
 							<view class="list-setup-opt">
 								<text @click="clickGoodsMinus(item.id, item.count, 1)">-</text>
-								<input type="number" :value="item.count" @input="inputGoodsCount" :data-goods_id="item.id"/>
+								<input type="number" :value="item.count" @input="inputGoodsCount"
+									:data-goods_id="item.id" />
 								<text @click="clickGoodsAdd(item.id, 1)">+</text>
 							</view>
 						</view>
@@ -66,16 +67,15 @@
 </template>
 
 <script>
-	
 	/*
 	 * 追格商城小程序
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
 	 * github: https://github.com/zhuige-com/zhuige_shop
-	 * Copyright © 2022 www.zhuige.com All rights reserved.
+	 * Copyright © 2022-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import Util from '@/utils/util';
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
@@ -127,7 +127,7 @@
 				console.log(err)
 			});
 		},
-		
+
 		onShareAppMessage() {
 			return {
 				title: getApp().globalData.appDesc + '_' + getApp().globalData.appName,
@@ -163,10 +163,14 @@
 			clickItemCheck(goods_id) {
 				if (this.manage) {
 					// item.check_del = (item.check_del == 1 ? 0 : 1);
-					store.commit('cartSetGoodsCheckDel', {goods_id: goods_id})
+					store.commit('cartSetGoodsCheckDel', {
+						goods_id: goods_id
+					})
 				} else {
 					// item.check_buy = (item.check_buy == 1 ? 0 : 1);
-					store.commit('cartSetGoodsCheckBuy', {goods_id: goods_id})
+					store.commit('cartSetGoodsCheckBuy', {
+						goods_id: goods_id
+					})
 				}
 			},
 
@@ -210,7 +214,7 @@
 
 				Util.updateCartBadge(this.getCartCount);
 			},
-			
+
 			/**
 			 * 设置商品数量
 			 */
@@ -219,12 +223,12 @@
 				if (!count || count < 1) {
 					count = 1;
 				}
-				
+
 				store.commit('cartSetGoodsCount', {
 					goods_id: e.currentTarget.dataset.goods_id,
 					count: count
 				});
-				
+
 				Util.updateCartBadge(this.getCartCount);
 			},
 
@@ -243,6 +247,9 @@
 				}
 			},
 
+			/**
+			 * 下一步
+			 */
 			clickNext() {
 				if (this.manage) {
 					if (this.getCheckDelCount == 0) {
