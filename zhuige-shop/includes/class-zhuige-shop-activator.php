@@ -28,8 +28,8 @@ class ZhuiGe_Shop_Activator
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         
         //订单表
-        $table_score_order = $wpdb->prefix . 'zhuige_shop_user_order';
-        $sql = "CREATE TABLE IF NOT EXISTS `$table_score_order` (
+        $table_shop_user_order = $wpdb->prefix . 'zhuige_shop_user_order';
+        $sql = "CREATE TABLE IF NOT EXISTS `$table_shop_user_order` (
             `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
             `trade_no` varchar(50) NOT NULL DEFAULT '' COMMENT '订单号',
             `wx_trans_id` varchar(50) NOT NULL DEFAULT '' COMMENT '微信流水号',
@@ -52,8 +52,8 @@ class ZhuiGe_Shop_Activator
         dbDelta($sql);
 
         //待评论商品列表
-        $table_goods_comment = $wpdb->prefix . 'zhuige_shop_goods_comment';
-        $sql = "CREATE TABLE IF NOT EXISTS `$table_goods_comment` (
+        $table_shop_goods_comment = $wpdb->prefix . 'zhuige_shop_goods_comment';
+        $sql = "CREATE TABLE IF NOT EXISTS `$table_shop_goods_comment` (
             `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
             `user_id` bigint(20) NOT NULL COMMENT '用户',
             `order_id` bigint(20) NOT NULL COMMENT '订单',

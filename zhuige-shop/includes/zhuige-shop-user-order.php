@@ -20,20 +20,20 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 
 require dirname( __FILE__ ) . '/class-zhuige-shop-user-order-list.php';
 
-add_action('admin_menu', 'zhuige_shop_add_score_order_menu');
-function zhuige_shop_add_score_order_menu() {
+add_action('admin_menu', 'zhuige_shop_add_user_order_menu');
+function zhuige_shop_add_user_order_menu() {
 	add_menu_page(
 		'追格商城订单', 			// Page title.
 		'追格商城订单',        		// Menu title.
 		'activate_plugins',			// Capability.
 		'zhuige_shop_user_order',			// Menu slug.
-		'zhuige_shop_render_score_order',		// Callback function.
+		'zhuige_shop_render_user_order',		// Callback function.
 		'',
 		3
 	);
 }
 
-function zhuige_shop_render_score_order() {
+function zhuige_shop_render_user_order() {
 	$action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : '';
 
 	if ('edit' == $action) {
@@ -41,10 +41,10 @@ function zhuige_shop_render_score_order() {
 
 		$order = [];
 		global $wpdb;
-		$table_score_order = $wpdb->prefix . 'zhuige_shop_user_order';
+		$table_shop_user_order = $wpdb->prefix . 'zhuige_shop_user_order';
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM $table_score_order WHERE id=%d", $id
+				"SELECT * FROM $table_shop_user_order WHERE id=%d", $id
 			),
 		ARRAY_A);
 
@@ -68,7 +68,7 @@ function zhuige_shop_render_score_order() {
 			$wformat = [
 				'%d'
 			];
-			$wpdb->update($table_score_order, $udata, $wdata, $uformat, $wformat);
+			$wpdb->update($table_shop_user_order, $udata, $wdata, $uformat, $wformat);
 
 			$success = '修改成功';
 		}
