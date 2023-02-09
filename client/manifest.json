@@ -2,7 +2,7 @@
     "name" : "client",
     "appid" : "",
     "description" : "",
-    "versionName" : "1.2.6",
+    "versionName" : "1.2.7",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {

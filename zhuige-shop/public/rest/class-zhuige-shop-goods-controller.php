@@ -137,9 +137,9 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 							]
 						]
 					];
-			
+
 					$list = [];
-			
+
 					$query = new WP_Query();
 					$result = $query->query($args);
 					foreach ($result as $post) {
@@ -191,7 +191,7 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		return $this->make_success([
-			'list' => $resources, 
+			'list' => $resources,
 			'more' => (count($result) >= ZHuige_Shop::POSTS_PER_PAGE ? 'more' : 'nomore')
 		]);
 	}

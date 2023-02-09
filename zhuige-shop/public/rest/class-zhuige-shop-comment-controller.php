@@ -72,9 +72,12 @@ class ZhuiGe_Shop_Comment_Controller extends ZhuiGe_Shop_Base_Controller
 		global $wpdb;
 		$godds_log = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}zhuige_shop_goods_comment WHERE `user_id`=%d AND `goods_id`=%d", $my_user_id, $post_id
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_goods_comment WHERE `user_id`=%d AND `goods_id`=%d",
+				$my_user_id,
+				$post_id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		if (!$godds_log) {
 			return $this->make_error('购买并确认收货后才能评论');
 		}
@@ -86,7 +89,7 @@ class ZhuiGe_Shop_Comment_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
-		if(!$this->msg_sec_check($content)) {
+		if (!$this->msg_sec_check($content)) {
 			return $this->make_error('请勿发布敏感信息');
 		}
 

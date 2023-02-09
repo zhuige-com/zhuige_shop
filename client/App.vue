@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 追格商城小程序 v1.2.6
+	 * 追格商城小程序 v1.2.7
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop
@@ -17,8 +17,7 @@
 			appDesc: '',
 		},
 
-		onLaunch: function() {
-			// console.log('App Launch')
+		onLaunch() {
 			let cart = Util.loadCart();
 			if (!cart) {
 				cart = [];
@@ -26,11 +25,11 @@
 			store.commit('cartSet', cart);
 		},
 
-		onShow: function() {
-			// console.log('App Show')
+		onShow() {
+
 		},
 
-		onHide: function() {
+		onHide() {
 			console.log('App Hide')
 		}
 	}

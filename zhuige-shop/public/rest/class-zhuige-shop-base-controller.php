@@ -73,7 +73,7 @@ class ZhuiGe_Shop_Base_Controller extends WP_REST_Controller
 	/**
 	 * 获取一个缩略图
 	 */
-	public function get_one_post_thumbnail($post_id, $default=true)
+	public function get_one_post_thumbnail($post_id, $default = true)
 	{
 		if (has_post_thumbnail($post_id)) {
 			$thumbnail_id = get_post_thumbnail_id($post_id);
@@ -107,7 +107,7 @@ class ZhuiGe_Shop_Base_Controller extends WP_REST_Controller
 		if (!isset($_REQUEST['os']) || (isset($_REQUEST['os']) && $_REQUEST['os'] != 'wx')) {
 			return true;
 		}
-		
+
 		$wx_session = ZhuiGe_Shop::get_wx_token();
 		$access_token = $wx_session['access_token'];
 		if (empty($access_token)) {

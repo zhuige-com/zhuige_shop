@@ -14,11 +14,11 @@ function getToken() {
 module.exports = {
 	getToken: getToken,
 
-	setUser: function(user) {
+	setUser(user) {
 		uni.setStorageSync(Constant.ZHUIGE_USER_KEY, user);
 	},
 
-	getUser: function() {
+	getUser() {
 		return uni.getStorageSync(Constant.ZHUIGE_USER_KEY);
 	}
 };

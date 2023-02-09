@@ -66,14 +66,14 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 				'role' => 'subscriber',
 				'user_pass' => wp_generate_password(16, false),
 			]);
-			
+
 			if (is_wp_error($user_id)) {
 				return $this->make_error('创建用户失败');
 			}
 
 			$first = 1;
 		}
-		
+
 		update_user_meta($user_id, 'jq_channel', $channel);
 
 		if ('weixin' == $channel) {
@@ -182,7 +182,7 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 
 		$avatar = $this->param_value($request, 'avatar', '');
 		$nickname = $this->param_value($request, 'nickname', '');
-		if(!$this->msg_sec_check($nickname)) {
+		if (!$this->msg_sec_check($nickname)) {
 			return $this->make_error('请勿发布敏感信息');
 		}
 

@@ -150,9 +150,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		global $wpdb;
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d",
+				$order_id,
+				$my_user_id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		if (!$order) {
 			return $this->make_error('无权查看此订单');
 		}
@@ -196,9 +199,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		global $wpdb;
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d",
+				$order_id,
+				$my_user_id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		if (!$order) {
 			return $this->make_error('无权查看此订单');
 		}
@@ -231,9 +237,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		global $wpdb;
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d",
+				$order_id,
+				$my_user_id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		if (!$order) {
 			return $this->make_error('无权查看此订单');
 		}
@@ -266,9 +275,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		global $wpdb;
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d",
+				$order_id,
+				$my_user_id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		if (!$order) {
 			return $this->make_error('无权查看');
 		}
@@ -325,9 +337,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		$orders = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM `{$wpdb->prefix}zhuige_shop_user_order` WHERE `user_id`=%d AND deletetime is null $where ORDER BY `id` DESC LIMIT %d, %d",
-				$my_user_id, $offset, ZhuiGe_Shop::POSTS_PER_PAGE
+				$my_user_id,
+				$offset,
+				ZhuiGe_Shop::POSTS_PER_PAGE
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		foreach ($orders as &$order) {
 			$order['goods_list'] = unserialize($order['goods_list']);
 			$order['createtime'] = wp_date('Y.m.d H:i:s', $order['createtime']);
@@ -352,27 +367,32 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		$table_order = "`{$wpdb->prefix}zhuige_shop_user_order` ";
 		$data['all_count'] = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null", $my_user_id
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null",
+				$my_user_id
 			)
 		);
 		$data['create_count'] = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND paytime is null AND confirmtime is null AND canceltime is null", $my_user_id
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND paytime is null AND confirmtime is null AND canceltime is null",
+				$my_user_id
 			)
 		);
 		$data['pay_count'] = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND paytime is not null AND confirmtime is null", $my_user_id
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND paytime is not null AND confirmtime is null",
+				$my_user_id
 			)
 		);
 		$data['confirm_count'] = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND confirmtime is not null", $my_user_id
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND confirmtime is not null",
+				$my_user_id
 			)
 		);
 		$data['cancel_count'] = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND canceltime is not null", $my_user_id
+				"SELECT COUNT(id) FROM $table_order WHERE `user_id`=%d AND deletetime is null AND canceltime is not null",
+				$my_user_id
 			)
 		);
 
@@ -397,9 +417,12 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 		global $wpdb;
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d", $order_id, $my_user_id
+				"SELECT * FROM {$wpdb->prefix}zhuige_shop_user_order WHERE `id`=%d AND `user_id`=%d",
+				$order_id,
+				$my_user_id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 		if (!$order) {
 			return $this->make_error('无权查看');
 		}
