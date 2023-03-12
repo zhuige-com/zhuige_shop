@@ -7,7 +7,7 @@
  * github: https://github.com/zhuige-com/zhuige_shop
  * gitee: https://gitee.com/zhuige_com/zhuige_shop
  * License：GPL-2.0
- * Copyright © 2022 www.zhuige.com All rights reserved.
+ * Copyright © 2022-2023 www.zhuige.com All rights reserved.
  */
 
 $content = '欢迎使用追格商城小程序小程序! <br/><br/> 微信客服：jianbing2011 (加开源群、问题咨询、项目定制、购买咨询) <br/><br/> <a href="https://www.zhuige.com/download.html" target="_blank">更多免费产品</a>';

@@ -4,7 +4,7 @@
  * Plugin Name:		追格商城小程序
  * Plugin URI:		https://www.zhuige.com/product/sc.html
  * Description:		WordPress + uni-app 购物商城小程序
- * Version:			1.2.7
+ * Version:			1.2.8
  * Author:			追格
  * Author URI:		https://www.zhuige.com/
  * License:			GPLv2 or later

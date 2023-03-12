@@ -7,7 +7,7 @@
  * github: https://github.com/zhuige-com/zhuige_shop
  * gitee: https://gitee.com/zhuige_com/zhuige_shop
  * License：GPL-2.0
- * Copyright © 2022 www.zhuige.com All rights reserved.
+ * Copyright © 2022-2023 www.zhuige.com All rights reserved.
  */
 
 class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
