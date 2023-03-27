@@ -28,7 +28,7 @@ function zhuige_shop_add_user_order_menu() {
 		'activate_plugins',			// Capability.
 		'zhuige_shop_user_order',			// Menu slug.
 		'zhuige_shop_render_user_order',		// Callback function.
-		'',
+		'dashicons-chart-bar',
 		3
 	);
 }

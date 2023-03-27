@@ -22,7 +22,7 @@
 /**
  * @fileoverview audio 组件
  */
-const context = require('./context')
+import context from './context'
 export default {
   data () {
     return {
@@ -72,8 +72,7 @@ export default {
   },
   beforeDestroy () {
     this._ctx.destroy()
-    // context.remove(this.properties.audioId)
-	context.remove(this.aid)
+    context.remove(this.aid)
   },
   onPageShow () {
     if (this.playing && this._ctx.paused) {
@@ -106,6 +105,10 @@ export default {
       this.playing = false
       this.$emit('pause')
     },
+    // 设置播放速率
+    playbackRate (rate) {
+      this._ctx.playbackRate = rate
+    },
     // 移动进度条
     seek (sec) {
       this._ctx.seek(sec)
@@ -137,10 +140,10 @@ export default {
 ._contain {
   position: relative;
   display: inline-flex;
-  width: 99%;
+  width: 290px;
   background-color: #fcfcfc;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
 }
 
 /* 播放、暂停按钮 */
@@ -152,7 +155,7 @@ export default {
   height: 20px;
   overflow: hidden;
   background-color: rgb(0, 0, 0, 0.2);
-  border: 1rpx solid white;
+  border: 1px solid white;
   border-radius: 50%;
   opacity: 0.9;
 }
@@ -177,23 +180,19 @@ export default {
   justify-content: center;
   width: 70px;
   height: 70px;
-  background-color: #f5f5f5;
+  background-color: #e6e6e6;
   background-size: contain;
-  background-position-x: center;
-  background-position-y: center;
-  background-repeat: no-repeat;
-  border-radius: 4px 0 0 4px;
 }
 
 /* 标题栏 */
 ._title {
   flex: 1;
-  margin: 4rpx 0 0 14px;
+  margin: 4px 0 0 14px;
   text-align: left;
 }
 
 ._author {
-  width: 90px;
+  width: 45px;
   font-size: 12px;
   color: #888;
 }
@@ -216,7 +215,7 @@ export default {
   position: absolute;
   right: 16px;
   bottom: 8px;
-  width: 146px;
+  width: 140px;
   margin: 0;
 }
 

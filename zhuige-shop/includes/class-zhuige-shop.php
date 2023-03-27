@@ -157,6 +157,11 @@ class ZhuiGe_Shop
 		require_once ZHUIGE_SHOP_BASE_DIR . 'public/rest/class-zhuige-shop-comment-controller.php';
 
 		/**
+		 * AJAX
+		 */
+		require_once ZHUIGE_SHOP_BASE_DIR . 'includes/class-zhuige-shop-ajax.php';
+
+		/**
 		 * 后台管理
 		 */
 		require_once ZHUIGE_SHOP_BASE_DIR . 'admin/codestar-framework/codestar-framework.php';
