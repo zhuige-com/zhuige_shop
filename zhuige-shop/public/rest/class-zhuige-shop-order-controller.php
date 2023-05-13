@@ -28,7 +28,7 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 			'delete' => 'delete',
 			'pay' => 'pay',
 
-			'list' => 'list',
+			'list' => 'order_list',
 			'detail' => 'detail',
 
 			'count' => 'count',
@@ -313,7 +313,7 @@ class ZhuiGe_Shop_Order_Controller extends ZhuiGe_Shop_Base_Controller
 	/**
 	 * 订单列表
 	 */
-	public function list($request)
+	public function order_list($request)
 	{
 		$my_user_id = get_current_user_id();
 		if (!$my_user_id) {

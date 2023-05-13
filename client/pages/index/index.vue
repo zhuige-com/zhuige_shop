@@ -120,6 +120,7 @@
 
 	export default {
 		data() {
+			this.share_title = undefined;
 			this.share_thumb = undefined;
 
 			return {
@@ -172,6 +173,10 @@
 				title: getApp().globalData.appDesc + '_' + getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
+			
+			if (this.share_title && this.share_title.length>0) {
+				params.title = this.share_title;
+			}
 
 			if (this.share_thumb) {
 				params.imageUrl = this.share_thumb;
@@ -236,6 +241,7 @@
 					getApp().globalData.appDesc = res.data.desc;
 
 					this.background = res.data.background;
+					this.share_title = res.data.home_title;
 					this.share_thumb = res.data.thumb;
 
 					this.slides = res.data.slides;

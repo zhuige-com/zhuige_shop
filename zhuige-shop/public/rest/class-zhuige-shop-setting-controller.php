@@ -43,6 +43,9 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 		$home_bg = ZhuiGe_Shop::option_value('home_bg');
 		$data['background'] = ZhuiGe_Shop::option_image_url($home_bg, 'default_bg.jpg');
 
+		// 首页分享标题
+		$data['home_title'] = ZhuiGe_Shop::option_value('home_title');
+
 		//首页分享头图
 		$home_thumb = ZhuiGe_Shop::option_value('home_thumb');
 		if ($home_thumb && $home_thumb['url']) {

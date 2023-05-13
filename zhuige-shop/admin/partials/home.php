@@ -25,6 +25,13 @@ CSF::createSection($prefix, array(
         ),
 
         array(
+            'id'          => 'home_title',
+            'type'        => 'text',
+            'title'       => '分享标题',
+            'placeholder' => '分享标题'
+        ),
+
+        array(
             'id'      => 'home_thumb',
             'type'    => 'media',
             'title'   => '分享缩略图',

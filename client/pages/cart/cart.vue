@@ -162,12 +162,10 @@
 			 */
 			clickItemCheck(goods_id) {
 				if (this.manage) {
-					// item.check_del = (item.check_del == 1 ? 0 : 1);
 					store.commit('cartSetGoodsCheckDel', {
 						goods_id: goods_id
 					})
 				} else {
-					// item.check_buy = (item.check_buy == 1 ? 0 : 1);
 					store.commit('cartSetGoodsCheckBuy', {
 						goods_id: goods_id
 					})
@@ -204,15 +202,14 @@
 							}
 						}
 					});
-					return;
+				} else {
+					store.commit('cartGoodsMinus', {
+						goods_id: goods_id,
+						count: count
+					});
+					
+					Util.updateCartBadge(this.getCartCount);
 				}
-
-				store.commit('cartGoodsMinus', {
-					goods_id: goods_id,
-					count: count
-				});
-
-				Util.updateCartBadge(this.getCartCount);
 			},
 
 			/**
