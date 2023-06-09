@@ -36,9 +36,6 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 		//描述
 		$data['desc'] = ZhuiGe_Shop::option_value('basic_desc', '');
 
-		// //关键字
-		// $data['keywords'] = ZhuiGe_Shop::option_value('basic_keywords', '');
-
 		//背景图
 		$home_bg = ZhuiGe_Shop::option_value('home_bg');
 		$data['background'] = ZhuiGe_Shop::option_image_url($home_bg, 'default_bg.jpg');
@@ -144,12 +141,6 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 		$my_bg = ZhuiGe_Shop::option_value('my_bg');
 		$data['background'] = ZhuiGe_Shop::option_image_url($my_bg, 'default_bg.jpg');
 
-		// $copyright = ZhuiGe_Shop::option_value('copyright');
-		// if ($copyright['switch']) {
-		// 	$copyright['logo'] = ZhuiGe_Shop::option_image_url($copyright['logo'], 'logo_f.png');
-		// 	$data['copyright'] = $copyright;
-		// }
-
 		$my_about = ZhuiGe_Shop::option_value('my_about');
 		if ($my_about) {
 			$data['page_about'] = '/pages/about/about?page_id=' . $my_about;
@@ -164,9 +155,6 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 	public function get_login($request)
 	{
 		$data = [];
-
-		// $login_bg = ZhuiGe_Shop::option_value('login_bg');
-		// $data['background'] = ZhuiGe_Shop::option_image_url($login_bg, 'default_bg.jpg');
 
 		$login_logo = ZhuiGe_Shop::option_value('login_logo');
 		$data['logo'] = ZhuiGe_Shop::option_image_url($login_logo, 'logo_f.png');

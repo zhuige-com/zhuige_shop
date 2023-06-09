@@ -32,11 +32,7 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 	{
 		$code = $this->param_value($request, 'code', '');
 		$nickname = $this->param_value($request, 'nickname', '');
-		// $avatar = $this->param_value($request, 'avatar', '');
 		$channel = $this->param_value($request, 'channel', '');
-		// if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
-		// 	return $this->make_error('缺少参数');
-		// }
 		if (empty($code) || empty($nickname) || empty($channel)) {
 			return $this->make_error('缺少参数');
 		}
@@ -83,8 +79,6 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		if (isset($session['unionid']) && !empty($session['unionid'])) {
 			update_user_meta($user_id, 'jq_unionid', $session['unionid']);
 		}
-
-		// update_user_meta($user_id, 'zhuige_avatar', $avatar);
 
 		$zhuige_token = $this->_generate_token();
 		update_user_meta($user_id, 'zhuige_token', $zhuige_token);

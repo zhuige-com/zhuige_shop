@@ -503,25 +503,7 @@ class ZhuiGe_Shop_PayNotifyCallBack extends ZhuiGe_WxPayNotify
 	// 重写回调处理函数
 	public function NotifyProcess($data, &$msg)
 	{
-		file_put_contents('wx_pay_callback.txt', json_encode($data) . PHP_EOL, FILE_APPEND | LOCK_EX);
-		// {
-		// 	"appid":"wx330d4c92336035d2",
-		// 	"bank_type":"COMM_CREDIT",
-		// 	"cash_fee":"1",
-		// 	"fee_type":"CNY",
-		// 	"is_subscribe":"N",
-		// 	"mch_id":"1514255851",
-		// 	"nonce_str":"w1rz0gz48qai1ktybco1chs1djx24gf7",
-		// 	"openid":"oX-Ag5VoCpHK8h7_94PRFitIT9eM",
-		// 	"out_trade_no":"JQ_10_1625713135",
-		// 	"result_code":"SUCCESS",
-		// 	"return_code":"SUCCESS",
-		// 	"sign":"916C1511C1753C3F4B5EEF04D8E313B3",
-		// 	"time_end":"20210708105914",
-		// 	"total_fee":"1",
-		// 	"trade_type":"JSAPI",
-		// 	"transaction_id":"4200001193202107086406645521"
-		// }
+		// file_put_contents('wx_pay_callback.txt', json_encode($data) . PHP_EOL, FILE_APPEND | LOCK_EX);
 
 		if (!array_key_exists('transaction_id', $data)) {
 			$msg = '输入参数不正确';
