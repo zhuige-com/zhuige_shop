@@ -177,16 +177,14 @@ class ZhuiGe_Shop_Admin
 
 	public function handle_external_redirects()
 	{
-		if (empty($_GET['page'])) {
-			return;
-		}
-
-		if ('ZhuiGe_Shop_setup' === $_GET['page']) {
+		$page = isset($_GET['page']) ? $_GET['page'] : '';
+		
+		if ('ZhuiGe_Shop_setup' === $page) {
 			wp_redirect('https://www.zhuige.com/product.html');
 			die;
 		}
 
-		if ('ZhuiGe_Shop_upgrade' === $_GET['page']) {
+		if ('ZhuiGe_Shop_upgrade' === $page) {
 			wp_redirect('https://www.zhuige.com/product/sc.html');
 			die;
 		}

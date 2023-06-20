@@ -180,9 +180,15 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 			return $this->make_error('请勿发布敏感信息');
 		}
 
-		if (!empty($nickname)) {
-			update_user_meta($user_id, 'nickname', $nickname);
+		if (empty($nickname)) {
+			return $this->make_error('昵称不可为空');
 		}
+		wp_update_user([
+			'ID' => $user_id,
+			'nickname' => $nickname,
+			'user_nicename' => $nickname,
+			'display_name' => $nickname,
+		]);
 
 		if (!empty($avatar)) {
 			update_user_meta($user_id, 'zhuige_avatar', $avatar);
