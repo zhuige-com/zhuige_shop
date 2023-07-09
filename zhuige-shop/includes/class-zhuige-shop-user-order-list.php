@@ -80,7 +80,6 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 	protected function column_default($item, $column_name)
 	{
 		switch ($column_name) {
-			// case 'id':
 			case 'trade_no':
 			case 'remark':
 				return $item[$column_name];
@@ -260,12 +259,13 @@ class ZhuiGe_Shop_User_Order_List extends WP_List_Table
 	/**
 	 * 修改表格样式
 	 */
-	protected function get_table_classes() {
-		$mode = get_user_setting( 'posts_list_mode', 'list' );
+	protected function get_table_classes()
+	{
+		$mode = get_user_setting('posts_list_mode', 'list');
 
-		$mode_class = esc_attr( 'table-view-' . $mode );
+		$mode_class = esc_attr('table-view-' . $mode);
 
-		return array( 'widefat', 'striped', $mode_class, $this->_args['plural'] );
+		return array('widefat', 'striped', $mode_class, $this->_args['plural']);
 	}
 
 	protected function get_views()

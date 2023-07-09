@@ -10,18 +10,19 @@
  * Copyright © 2022-2023 www.zhuige.com All rights reserved.
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_List_Table' ) ) {
+if (!class_exists('WP_List_Table')) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
-require dirname( __FILE__ ) . '/class-zhuige-shop-user-order-list.php';
+require dirname(__FILE__) . '/class-zhuige-shop-user-order-list.php';
 
 add_action('admin_menu', 'zhuige_shop_add_user_order_menu');
-function zhuige_shop_add_user_order_menu() {
+function zhuige_shop_add_user_order_menu()
+{
 	add_menu_page(
 		'追格商城订单', 			// Page title.
 		'追格商城订单',        		// Menu title.
@@ -33,7 +34,8 @@ function zhuige_shop_add_user_order_menu() {
 	);
 }
 
-function zhuige_shop_render_user_order() {
+function zhuige_shop_render_user_order()
+{
 	$action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : '';
 
 	if ('edit' == $action) {
@@ -44,9 +46,11 @@ function zhuige_shop_render_user_order() {
 		$table_shop_user_order = $wpdb->prefix . 'zhuige_shop_user_order';
 		$order = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM $table_shop_user_order WHERE id=%d", $id
+				"SELECT * FROM $table_shop_user_order WHERE id=%d",
+				$id
 			),
-		ARRAY_A);
+			ARRAY_A
+		);
 
 		if (isset($_POST['submit'])) {
 			$express_type = isset($_POST['express_type']) ? sanitize_text_field(wp_unslash($_POST['express_type'])) : '';
@@ -100,7 +104,7 @@ function zhuige_shop_render_user_order() {
 						</th>
 						<td>
 							<?php
-								echo $order['trade_no'];
+							echo $order['trade_no'];
 							?>
 						</td>
 					</tr>
@@ -110,19 +114,19 @@ function zhuige_shop_render_user_order() {
 						</th>
 						<td>
 							<?php
-								$goods_list = unserialize($order['goods_list']);
-						
-								$content = "<table>";
-								foreach ($goods_list as $goods) {
-									$content .= "<tr>";
-									$content .= "<td><img src='" . $goods['thumb'] . "' style='width:48px;height:48px;'/></td>";
-									$content .= "<td>" . $goods['name'] . "-";
-									$content .= "" . $goods['price'] . "元 X " . $goods['count'] . "</td>";
-									$content .= "</tr>";
-								}
-								$content .= "</table>";
-						
-								echo $content;
+							$goods_list = unserialize($order['goods_list']);
+
+							$content = "<table>";
+							foreach ($goods_list as $goods) {
+								$content .= "<tr>";
+								$content .= "<td><img src='" . $goods['thumb'] . "' style='width:48px;height:48px;'/></td>";
+								$content .= "<td>" . $goods['name'] . "-";
+								$content .= "" . $goods['price'] . "元 X " . $goods['count'] . "</td>";
+								$content .= "</tr>";
+							}
+							$content .= "</table>";
+
+							echo $content;
 							?>
 						</td>
 					</tr>
@@ -132,9 +136,9 @@ function zhuige_shop_render_user_order() {
 						</th>
 						<td>
 							<?php
-								echo $order['addressee'] . '<br/>';
-								echo $order['mobile'] . '<br/>';
-								echo $order['address'] . '<br/>';
+							echo $order['addressee'] . '<br/>';
+							echo $order['mobile'] . '<br/>';
+							echo $order['address'] . '<br/>';
 							?>
 						</td>
 					</tr>
@@ -152,12 +156,12 @@ function zhuige_shop_render_user_order() {
 				</p>
 			</form>
 		</div>
-<?php
+	<?php
 	} else {
 		$user_order_list = new ZhuiGe_Shop_User_Order_List();
 		$search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
 		$user_order_list->prepare_items($search);
-?>
+	?>
 		<div class="wrap">
 			<h1 class="wp-heading-inline"><?php echo esc_html(get_admin_page_title()); ?></h1>
 
@@ -187,6 +191,4 @@ function zhuige_shop_render_user_order() {
 		</div>
 <?php
 	}
-
-	
 }

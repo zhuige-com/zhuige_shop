@@ -207,7 +207,7 @@
 						goods_id: goods_id,
 						count: count
 					});
-					
+
 					Util.updateCartBadge(this.getCartCount);
 				}
 			},

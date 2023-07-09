@@ -16,10 +16,6 @@
 					<!-- #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU -->
 					<view v-if="code" class="button" @click="clickLogin()">授权登录</view>
 					<!-- #endif -->
-
-					<!-- #ifdef MP-QQ || MP-BAIDU -->
-					<!-- <button v-if="code" class="button" open-type="getUserInfo" @getuserinfo="getuserinfo">授权登录</button> -->
-					<!-- #endif -->
 				</template>
 
 				<template v-if="type=='mobile'">
@@ -128,7 +124,7 @@
 				this.login('百度用户', '');
 				// #endif
 			},
-			
+
 			/**
 			 * 点击返回
 			 */

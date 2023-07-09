@@ -26,7 +26,7 @@ class ZhuiGe_Shop_Activator
         }
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        
+
         //订单表
         $table_shop_user_order = $wpdb->prefix . 'zhuige_shop_user_order';
         $sql = "CREATE TABLE IF NOT EXISTS `$table_shop_user_order` (

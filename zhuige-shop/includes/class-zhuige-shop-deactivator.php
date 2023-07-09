@@ -10,10 +10,11 @@
  * Copyright © 2022-2023 www.zhuige.com All rights reserved.
  */
 
-class ZhuiGe_Shop_Deactivator {
+class ZhuiGe_Shop_Deactivator
+{
 
-	public static function deactivate() {
-
+	public static function deactivate()
+	{
 	}
-
+	
 }

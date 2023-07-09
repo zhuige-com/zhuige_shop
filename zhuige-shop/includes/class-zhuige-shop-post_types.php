@@ -53,7 +53,7 @@ class ZhuiGe_Shop_Post_Types
             'menu_name'         => '商品分类',
         );
         $goods_cat_args = array(
-            'labels' => $goods_cat_labels, 
+            'labels' => $goods_cat_labels,
             'hierarchical' => true,
         );
         register_taxonomy('jq_goods_cat', 'jq_goods', $goods_cat_args);

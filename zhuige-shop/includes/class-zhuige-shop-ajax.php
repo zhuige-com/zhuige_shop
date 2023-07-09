@@ -110,7 +110,6 @@ class ZhuiGe_Shop_AJAX
 
         die;
     }
-
 }
 
 ZhuiGe_Shop_AJAX::get_instance();

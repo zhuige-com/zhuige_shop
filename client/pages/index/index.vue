@@ -173,8 +173,8 @@
 				title: getApp().globalData.appDesc + '_' + getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
-			
-			if (this.share_title && this.share_title.length>0) {
+
+			if (this.share_title && this.share_title.length > 0) {
 				params.title = this.share_title;
 			}
 

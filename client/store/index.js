@@ -104,20 +104,6 @@ const store = new Vuex.Store({
 		},
 
 		/**
-		 * 选中的商品 - 管理
-		 */
-		// getCheckDelGoods(state) {
-		// 	let ids = [];
-		// 	state.cart.forEach((item, index) => {
-		// 		if (item.check_del == 1) {
-		// 			ids.push(item.id);
-		// 		}
-		// 	})
-
-		// 	return ids;
-		// },
-
-		/**
 		 * 选中的商品 - 金额
 		 */
 		getCheckBuyAmount(state) {
@@ -240,14 +226,6 @@ const store = new Vuex.Store({
 
 			Util.saveCart(state.cart);
 		},
-
-		// /**
-		//  * 清空购物车
-		//  */
-		// cartClear(state) {
-		// 	state.cart = [];
-		//  Util.saveCart(state.cart);
-		// },
 
 		/**
 		 * 全选 - 购买
