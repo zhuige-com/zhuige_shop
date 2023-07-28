@@ -1292,7 +1292,7 @@ class ZhuiGe_WxPayRefund extends ZhuiGe_WxPayDataBase
 	}
 
 	/**
-	* 设置操作员帐号, 默认为商户号
+	* 设置操作员账号, 默认为商户号
 	* @param string $value 
 	**/
 	public function SetOp_user_id($value)
@@ -1300,7 +1300,7 @@ class ZhuiGe_WxPayRefund extends ZhuiGe_WxPayDataBase
 		$this->values['op_user_id'] = $value;
 	}
 	/**
-	* 获取操作员帐号, 默认为商户号的值
+	* 获取操作员账号, 默认为商户号的值
 	* @return 值
 	**/
 	public function GetOp_user_id()
@@ -1308,7 +1308,7 @@ class ZhuiGe_WxPayRefund extends ZhuiGe_WxPayDataBase
 		return $this->values['op_user_id'];
 	}
 	/**
-	* 判断操作员帐号, 默认为商户号是否存在
+	* 判断操作员账号, 默认为商户号是否存在
 	* @return true 或 false
 	**/
 	public function IsOp_user_idSet()
