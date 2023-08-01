@@ -20,6 +20,7 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 			'home' => 'get_home',
 			'mine' => 'get_mine',
 			'login' => 'get_login',
+			'search' => 'get_search',
 		];
 	}
 
@@ -175,4 +176,19 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 
 		return $this->make_success($data);
 	}
+
+	/**
+	 * 获取配置 搜索
+	 */
+	public function get_search($request)
+	{
+		$data = ['hots' => []];
+		$hot_search = ZhuiGe_Shop::option_value('hot_search');
+		if (!empty($hot_search)) {
+			$data['hots'] = explode(',', $hot_search);
+		}
+
+		return $this->make_success($data);
+	}
+
 }

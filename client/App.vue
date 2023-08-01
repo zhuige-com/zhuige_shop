@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 追格商城小程序 v1.3.5
+	 * 追格商城小程序 v1.3.6
 	 * 作者: 追格
 	 * 文档: https://www.zhuige.com/docs/sc.html
 	 * gitee: https://gitee.com/zhuige_com/zhuige_shop

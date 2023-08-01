@@ -79,6 +79,11 @@ module.exports = {
 	 * 获取登录配置
 	 */
 	ZHUIGE_SHOP_SETTING_LOGIN: makeURL('setting', 'login'),
+	
+	/**
+	 * 获取搜索配置
+	 */
+	ZHUIGE_SHOP_SETTING_SEARCH: makeURL('setting', 'search'),
 
 	// ---------- 用户 ----------
 

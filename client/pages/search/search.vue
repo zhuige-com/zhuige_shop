@@ -17,6 +17,14 @@
 				<text @click="clickClear" class="del">清空历史</text>
 			</view>
 		</view>
+		
+		<!-- 热门 -->
+		<view v-if="hots && hots.length>0" class="zhuige-search-hot">
+			<view class="zhuige-block">
+				<view class="zhuige-search-hot-title">热门搜索</view>
+				<view v-for="(item, index) in hots" :key="index" @click="search(item)">{{item}}</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -42,6 +50,8 @@
 				keyword: '',
 
 				historys: [],
+				
+				hots: [],
 			}
 		},
 
@@ -52,6 +62,8 @@
 					this.historys = res.data;
 				}
 			});
+			
+			this.loadSetting();
 		},
 
 		onShareAppMessage() {
@@ -149,6 +161,17 @@
 				});
 
 				Util.openLink('/pages/list/list?search=' + keyword + '&title=搜索【' + keyword + '】');
+			},
+			
+			/**
+			 * 加载配置
+			 */
+			loadSetting() {
+				Rest.post(Api.ZHUIGE_SHOP_SETTING_SEARCH, {}).then(res => {
+					this.hots = res.data.hots;
+				}, err => {
+					console.log(err)
+				});
 			}
 		}
 	}
@@ -159,5 +182,23 @@
 
 	.content {
 		padding: 30rpx;
+	}
+	
+	.zhuige-search-hot {
+		margin-top: 10rpx;
+		text-align: center;
+	}
+	
+	.zhuige-search-hot .zhuige-block view {
+		padding: 20rpx;
+		font-size: 30rpx;
+		font-weight: 400;
+		color: #555555;
+	}
+	
+	.zhuige-search-hot .zhuige-block view.zhuige-search-hot-title {
+		font-size: 36rpx;
+		font-weight: 600;
+		color: #010101;
 	}
 </style>
