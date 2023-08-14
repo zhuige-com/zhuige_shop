@@ -123,6 +123,12 @@
 		},
 
 		onLoad(options) {
+			if (!options.goods_id) {
+				uni.reLaunch({
+					url: '/pages/index/index'
+				})
+				return;
+			}
 			this.goods_id = options.goods_id;
 
 			this.loadGoods();

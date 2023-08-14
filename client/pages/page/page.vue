@@ -29,7 +29,14 @@
 		},
 
 		onLoad(options) {
+			if (!options.page_id) {
+				uni.reLaunch({
+					url: '/pages/index/index'
+				})
+				return;
+			}
 			this.page_id = options.page_id;
+			
 			Rest.post(Api.ZHUIGE_SHOP_POST_PAGE, {
 				page_id: this.page_id
 			}).then(res => {
