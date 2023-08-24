@@ -36,5 +36,30 @@ CSF::createSection($prefix, array(
             'options'     => 'pages',
             'placeholder' => '选择一个页面',
         ),
+
+        array(
+            'id'     => 'beian_icp',
+            'type'   => 'fieldset',
+            'title'  => 'ICP备案',
+            'fields' => array(
+                array(
+                    'id'    => 'sn',
+                    'type'  => 'text',
+                    'title' => '备案号',
+                ),
+                array(
+                    'id'    => 'link',
+                    'type'  => 'text',
+                    'title' => '链接',
+                ),
+                array(
+                    'id'    => 'switch',
+                    'type'  => 'switcher',
+                    'title' => '是否显示',
+                    'default' => ''
+                ),
+            ),
+        ),
+        
     )
 ));

@@ -8,7 +8,7 @@
 .zhuige-nav-search {
 	display: flex;
 	align-items: center;
-	background: rgba(175, 175, 175, .1);
+	background: rgba(255, 255, 255, .4);
 	height: 60rpx;
 	padding: 0 20rpx;
 	min-width: 160rpx;
@@ -19,7 +19,7 @@
 .zhuige-nav-search text {
 	font-size: 24rpx;
 	font-weight: 400;
-	color: #999999;
+	color: #ffffff;
 }
 
 .zhuige-main-top {
@@ -121,20 +121,21 @@
 
 .zhuige-scroll-block view {
 	display: block;
-	width: 300rpx;
+	width: 280rpx;
 	color: #FFFFFF;
+	font-weight: 500;
 	bottom: 0rpx;
 	position: absolute;
 	z-index: 12;
-	font-size: 24rpx;
-	height: 70rpx;
-	line-height: 70rpx;
-	padding: 0 10rpx;
+	font-size: 26rpx;
+	height: 120rpx;
+	line-height: 160rpx;
+	padding: 0 20rpx;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	border-radius: 0 0 6rpx 6rpx;
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
 
 /* -------- 商品列表 -------- */
@@ -152,6 +153,7 @@
 .zhuige-goods-scroll {
 	width: 90%;
 	white-space: nowrap;
+	padding-left: 20rpx;
 }
 
 .zhuige-goods-scroll view {
@@ -196,6 +198,7 @@
 	background: #FFFFFF;
 	border-radius: 12rpx;
 	margin-bottom: 20rpx;
+	box-shadow: 0 10rpx 16rpx -8rpx rgba(79,125,183,.3);	
 }
 
 .zhuige-goods image {
@@ -959,7 +962,7 @@
 }
 
 .zhuige-user-menu {
-	padding-bottom: 100rpx;
+	padding-bottom: 80rpx;
 }
 
 .zhuige-user-opt {
@@ -1254,9 +1257,17 @@ button.zhuige-user-opt::after {
 }
 
 .zhuige-brand {
-	padding: 60rpx 40rpx;
+	padding: 10rpx 40rpx 20rpx;
 	text-align: center;
 	font-size: 26rpx;
+	font-weight: 300;
+	color: #999999;
+}
+
+.zhuige-record {
+	padding: 20rpx 20rpx 60rpx;
+	text-align: center;
+	font-size: 24rpx;
 	font-weight: 300;
 	color: #999999;
 }

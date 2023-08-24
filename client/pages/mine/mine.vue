@@ -83,7 +83,9 @@
 			</view>
 		</view>
 
-		<view class="zhuige-brand">追格 zhuige.com 提供技术支持</view>
+		<view class="zhuige-brand">本小程序基于追格（zhuige.com）搭建</view>
+		
+		<view class="zhuige-record" @click="clickLink(beian_icp.link)" v-if="beian_icp">{{beian_icp.sn}}</view>
 
 	</view>
 </template>
@@ -118,6 +120,8 @@
 
 				create_count: 0,
 				pay_count: 0,
+				
+				beian_icp: undefined,
 			}
 		},
 
@@ -131,6 +135,10 @@
 			Rest.post(Api.ZHUIGE_SHOP_SETTING_MINE).then(res => {
 				this.background = res.data.background;
 				this.page_about = res.data.page_about;
+				
+				if (res.data.beian_icp) {
+					this.beian_icp = res.data.beian_icp;
+				}
 			}, err => {
 				console.log(err);
 			});

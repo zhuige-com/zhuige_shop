@@ -147,6 +147,15 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 			$data['page_about'] = '/pages/about/about?page_id=' . $my_about;
 		}
 
+		// 备案信息
+		$beian_icp = ZhuiGe_Shop::option_value('beian_icp');
+		if ($beian_icp && $beian_icp['switch']) {
+			$data['beian_icp'] = [
+				'sn' => $beian_icp['sn'],
+				'link' => $beian_icp['link'],
+			];
+		}
+
 		return $this->make_success($data);
 	}
 

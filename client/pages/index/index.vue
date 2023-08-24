@@ -2,12 +2,12 @@
 	<view class="content"
 		:style="background ? 'background: url(' + background + ') no-repeat top; background-size: 100% auto;' : ''">
 
-		<uni-nav-bar title="首页" :fixed="true" :statusBar="true" :placeholder="false">
+		<uni-nav-bar :title="title" :color="nav_color" :background-color="nav_bgcolor" :border="false" :fixed="true" :statusBar="true" :placeholder="false">
 			<!-- 顶部小搜索框 -->
 			<view slot="left" @click="clickLink('/pages/search/search')">
 				<view class="zhuige-nav-search">
-					<uni-icons type="search" size="20" color="#999999"></uni-icons>
-					<text>关键词...</text>
+					<uni-icons type="search" size="20" :color="nav_color"></uni-icons>
+					<text :style="{color:nav_color}">关键词...</text>
 				</view>
 			</view>
 		</uni-nav-bar>
@@ -125,6 +125,10 @@
 
 			return {
 				background: undefined,
+				
+				title: '',
+				nav_color: 'rgb(255, 255, 255)',
+				nav_bgcolor: 'rgba(255, 255, 255, 0)',
 
 				slides: [],
 				icon_navs: [],
@@ -156,6 +160,33 @@
 
 		onShow() {
 			Util.updateCartBadge(this.getCartCount);
+		},
+		
+		onPageScroll(e) {
+			if (e.scrollTop > 20) {
+				let nav_opacity = (e.scrollTop - 20) / 255;
+				if (nav_opacity <= 1) {
+					let factor = 255 * (1 - nav_opacity);
+					this.nav_color = `rgb(${factor}, ${factor}, ${factor})`;
+					this.nav_bgcolor = `rgba(255, 255, 255, ${nav_opacity})`;
+					this.title = '首页';
+				} else if (this.nav_color != 'rgb(255, 255, 255)') {
+					this.nav_color = 'rgb(0, 0, 0)';
+					this.nav_bgcolor = 'rgba(255, 255, 255, 1)';
+				}
+				uni.setNavigationBarColor({
+					frontColor: '#000000',
+					backgroundColor: '#ffffff',
+				})
+			} else {
+				this.nav_color = 'rgb(255, 255, 255)';
+				this.nav_bgcolor = 'rgba(255, 255, 255, 0)';
+				this.title = '';
+				uni.setNavigationBarColor({
+					frontColor: '#ffffff',
+					backgroundColor: '#ffffff'
+				})
+			}
 		},
 
 		onReachBottom() {

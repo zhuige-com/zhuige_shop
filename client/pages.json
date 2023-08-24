@@ -3,6 +3,7 @@
 		"path": "pages/index/index",
 		"style": {
 			"navigationStyle": "custom",
+			"navigationBarTextStyle": "white",
 			"enablePullDownRefresh": true
 		}
 	}, {
