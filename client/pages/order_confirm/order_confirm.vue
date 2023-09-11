@@ -74,6 +74,7 @@
 			</view>
 		</view>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -96,6 +97,7 @@
 		mapMutations
 	} from 'vuex'
 	import store from '@/store/index.js'
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -106,6 +108,10 @@
 
 				remark: '',
 			}
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		computed: {

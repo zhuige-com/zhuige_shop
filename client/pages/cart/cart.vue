@@ -63,6 +63,7 @@
 			<view>暂无商品，去添加点什么吧~</view>
 		</view>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -87,12 +88,18 @@
 		mapMutations
 	} from 'vuex'
 	import store from '@/store/index.js'
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
 			return {
 				manage: false,
 			}
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		computed: {

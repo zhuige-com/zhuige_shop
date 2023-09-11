@@ -4,6 +4,8 @@
 		<textarea class="content" v-model="content" maxlength="140" confirm-type="done" />
 		<view class="footer">{{content.length}}/140</view>
 		<button class="button" type="default" @click="clickComment">提交</button>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -21,6 +23,8 @@
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -30,6 +34,10 @@
 				rate: 5,
 				content: '',
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

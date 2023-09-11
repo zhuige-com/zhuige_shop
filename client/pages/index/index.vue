@@ -96,6 +96,7 @@
 			</template>
 		</view>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -117,6 +118,7 @@
 	import {
 		mapGetters,
 	} from 'vuex'
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -151,6 +153,7 @@
 
 		components: {
 			JiangqieNoData,
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

@@ -87,6 +87,7 @@
 		
 		<view class="zhuige-record" @click="clickLink(beian_icp.link)" v-if="beian_icp">{{beian_icp.sn}}</view>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -108,6 +109,7 @@
 	import {
 		mapGetters,
 	} from 'vuex'
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -123,6 +125,10 @@
 				
 				beian_icp: undefined,
 			}
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		computed: {

@@ -74,6 +74,7 @@
 			</view>
 		</view>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -99,6 +100,7 @@
 	import store from '@/store/index.js'
 
 	import JiangqieNoData from "@/components/nodata/nodata";
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -114,6 +116,7 @@
 
 		components: {
 			JiangqieNoData,
+			ZhuigePrivacy
 		},
 
 		computed: {

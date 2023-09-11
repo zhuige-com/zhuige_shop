@@ -25,6 +25,8 @@
 				<view v-for="(item, index) in hots" :key="index" @click="search(item)">{{item}}</view>
 			</view>
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -43,6 +45,8 @@
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -53,6 +57,10 @@
 				
 				hots: [],
 			}
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

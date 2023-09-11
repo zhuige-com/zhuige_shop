@@ -23,8 +23,9 @@
 				<view @click="clickBack">跳过</view>
 			</view>
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
-
 </template>
 
 <script>
@@ -42,6 +43,8 @@
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -49,6 +52,10 @@
 				nickname: '',
 				avatar: '/static/images/default/avatar.jpg'
 			}
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

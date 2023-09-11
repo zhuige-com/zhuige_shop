@@ -3,6 +3,8 @@
 		<view v-if="post" class="zhuige-single-page">
 			<mp-html :content="post.content" />
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -18,6 +20,8 @@
 
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -26,6 +30,10 @@
 			return {
 				post: undefined
 			}
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {
