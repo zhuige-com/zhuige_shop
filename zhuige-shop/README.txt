@@ -4,7 +4,7 @@ Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
 Requires at least: 5.6
 Tested up to: 6.3
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,11 @@ github下载：https://github.com/zhuige-com/zhuige_shop
 2. screenshot-2.png
 
 == Changelog ==
+
+## 1.4.2（2023-09-20）
+1. 新增：幻灯片图片增标题设置；
+2. 新增：一级分类排序功能（小程序设置→分类设置→导航设置）；
+3. 其他：已知细节优化；
 
 ## 1.4.1（2023-09-11）
 1. 新增：隐私保护指引。

@@ -101,21 +101,31 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 	 */
 	public function get_category($request)
 	{
-		$terms = get_terms([
+		$category_cat = ZhuiGe_Shop::option_value('category_cat');
+		$term_args = [
 			'taxonomy' => 'jq_goods_cat',
-			'hide_empty' => false
-		]);
+			'hide_empty' => false,
+			'parent'   => 0,
+		];
+		if (is_array($category_cat) && count($category_cat) > 0) {
+			$term_args['include'] = $category_cat;
+			$term_args['orderby'] = 'include';
+		}
+		$terms = get_terms($term_args);
+
 		$cats = [];
 		foreach ($terms as $term) {
-			if ($term->parent == 0) {
-				$cats[] = [
-					'id' => $term->term_id,
-					'name' => $term->name,
-					'subs' => []
-				];
-			}
+			$cats[] = [
+				'id' => $term->term_id,
+				'name' => $term->name,
+				'subs' => []
+			];
 		}
 
+		$terms = get_terms([
+			'taxonomy' => 'jq_goods_cat',
+			'hide_empty' => false,
+		]);
 		foreach ($terms as $term) {
 			foreach ($cats as &$cat) {
 				if ($term->parent == $cat['id']) {

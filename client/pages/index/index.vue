@@ -19,6 +19,7 @@
 					indicator-color="rgba(255,255,255, 0.3)" indicator-active-color="rgba(255,255,255, 0.8)"
 					interval="5000" duration="150" easing-function="linear">
 					<swiper-item v-for="(slide, index) in slides" :key="index" @click="clickLink(slide.link)">
+						<view class="zhuige-swiper-title">{{slide.title}}</view>
 						<image :src="slide.image" mode="aspectFill"></image>
 					</swiper-item>
 				</swiper>

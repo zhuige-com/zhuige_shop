@@ -44,6 +44,11 @@ CSF::createSection($prefix, array(
             'title'  => '幻灯片',
             'fields' => array(
                 array(
+                    'id'       => 'title',
+                    'type'     => 'text',
+                    'title'    => '标题',
+                ),
+                array(
                     'id'      => 'image',
                     'type'    => 'media',
                     'title'   => '图片',
@@ -133,5 +138,18 @@ CSF::createSection($prefix, array(
             ),
         ),
 
+        array(
+            'id'          => 'goods_cat',
+            'type'        => 'select',
+            'title'       => '导航设置',
+            'placeholder' => '选择分类',
+            'chosen'      => true,
+            'multiple'    => true,
+            'sortable'    => true,
+            'options'     => 'categories',
+            'query_args'  => array(
+                'taxonomy'  => 'jq_goods_cat'
+            ),
+        ),
     )
 ));

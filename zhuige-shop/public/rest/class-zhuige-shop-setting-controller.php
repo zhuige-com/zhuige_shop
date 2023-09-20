@@ -57,6 +57,7 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 			foreach ($slides_org as $item) {
 				if ($item['switch'] && $item['image'] && $item['image']['url']) {
 					$slides[] = [
+						'title' => $item['title'],
 						'image' => $item['image']['url'],
 						'link' => $item['link'],
 					];
@@ -115,11 +116,17 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		//分类导航tab
-		$terms = get_terms([
+		$goods_cat = ZhuiGe_Shop::option_value('goods_cat');
+		$term_args = [
 			'taxonomy' => 'jq_goods_cat',
 			'hide_empty' => false,
-			'parent'   => 0
-		]);
+			// 'parent'   => 0,
+		];
+		if (is_array($goods_cat) && count($goods_cat) > 0) {
+			$term_args['include'] = $goods_cat;
+			$term_args['orderby'] = 'include';
+		}
+		$terms = get_terms($term_args);
 		$cats = [['id' => 0, 'name' => '最新']];
 		foreach ($terms as $term) {
 			$cats[] = [

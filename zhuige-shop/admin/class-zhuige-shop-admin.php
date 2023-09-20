@@ -186,7 +186,7 @@ class ZhuiGe_Shop_Admin
 		}
 
 		if ('ZhuiGe_Shop_upgrade' === $page) {
-			wp_redirect('https://www.zhuige.com/product/sc.html');
+			wp_redirect('https://www.zhuige.com/product/zhuige-wpmall.html');
 			die;
 		}
 	}
