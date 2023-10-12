@@ -116,7 +116,7 @@ const store = new Vuex.Store({
 				}
 			})
 
-			return amount;
+			return parseFloat(amount.toFixed(2));
 		},
 	},
 

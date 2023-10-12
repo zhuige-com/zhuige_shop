@@ -56,5 +56,10 @@ CSF::createSection($prefix, array(
             'placeholder' => '选择一个页面',
         ),
 
+        array(
+            'id'    => 'logout_explain',
+            'type'  => 'wp_editor',
+            'title' => '注销说明',
+        ),
     )
 ));

@@ -81,6 +81,11 @@ module.exports = {
 	ZHUIGE_SHOP_SETTING_LOGIN: makeURL('setting', 'login'),
 	
 	/**
+	 * 获取注销配置
+	 */
+	ZHUIGE_SHOP_SETTING_LOGOUT: makeURL('setting', 'logout'),
+	
+	/**
 	 * 获取搜索配置
 	 */
 	ZHUIGE_SHOP_SETTING_SEARCH: makeURL('setting', 'search'),
@@ -98,9 +103,14 @@ module.exports = {
 	ZHUIGE_SHOP_SET_MOBILE: makeURL('user', 'set_mobile'),
 
 	/**
-	 * 注销
+	 * 注销-登录
 	 */
 	ZHUIGE_SHOP_USER_LOGOUT: makeURL('user', 'logout'),
+	
+	/**
+	 * 注销-账号
+	 */
+	ZHUIGE_SHOP_USER_LOGOFF: makeURL('user', 'logoff'),
 
 	/**
 	 * 设置用户信息

@@ -19,6 +19,9 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		$this->routes = [
 			'login' => 'user_login',
 			'logout' => 'user_logout',
+			
+			'logoff' => 'user_logoff',
+
 			'set_mobile' => 'set_mobile',
 
 			'set_info' => 'set_info',
@@ -110,6 +113,33 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		update_user_meta($my_user_id, 'zhuige_token', '');
 
 		return $this->make_success();
+	}
+
+	/**
+	 * 注销账户
+	 */
+	public function user_logoff($request)
+	{
+		$user_id = get_current_user_id();
+		if (!$user_id) {
+			return $this->make_error('还没有登陆', -1);
+		}
+
+		$res = wp_delete_user($user_id);
+		if (!$res) {
+			return $this->make_error('请稍后再试~');
+		}
+
+		global $wpdb;
+
+		$wpdb->delete($wpdb->prefix . 'comments', ['user_id' => $user_id]);
+
+		$wpdb->delete($wpdb->prefix . 'zhuige_shop_user_order', ['user_id' => $user_id]);
+
+		$wpdb->delete($wpdb->prefix . 'zhuige_shop_goods_comment', ['user_id' => $user_id]);
+
+		return $this->make_success();
+
 	}
 
 	/**

@@ -20,6 +20,7 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 			'home' => 'get_home',
 			'mine' => 'get_mine',
 			'login' => 'get_login',
+			'logout' => 'get_logout',
 			'search' => 'get_search',
 		];
 	}
@@ -189,6 +190,19 @@ class ZhuiGe_Shop_Setting_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		$data['mobile'] = ZhuiGe_Shop::option_value('login_require_mobile');
+
+		return $this->make_success($data);
+	}
+
+	/**
+	 * 获取配置 注销
+	 */
+	public function get_logout($request)
+	{
+		$data = [];
+
+		// 奖项说明
+		$data['explain'] = apply_filters('the_content', ZhuiGe_Shop::option_value('logout_explain'));
 
 		return $this->make_success($data);
 	}
