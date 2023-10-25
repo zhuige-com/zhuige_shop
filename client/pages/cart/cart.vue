@@ -62,8 +62,6 @@
 			<image src="../../static/images/none_tip.png" mode="aspectFit"></image>
 			<view>暂无商品，去添加点什么吧~</view>
 		</view>
-
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -88,18 +86,16 @@
 		mapMutations
 	} from 'vuex'
 	import store from '@/store/index.js'
-	
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			
+		},
+		
 		data() {
 			return {
 				manage: false,
 			}
-		},
-		
-		components: {
-			ZhuigePrivacy
 		},
 
 		computed: {

@@ -40,8 +40,6 @@
 				及<text v-if="yszc" @click="clickYszc()">《隐私条款》</text><template v-else>隐私条款</template>
 			</view>
 		</view>
-		
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -61,10 +59,12 @@
 	import Alert from '@/utils/alert';
 	import Api from '@/utils/api';
 	import Rest from '@/utils/rest';
-	
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			
+		},
+		
 		data() {
 			return {
 				type: 'login',
@@ -78,10 +78,6 @@
 				yszc: '',
 				argeeLicense: false,
 			}
-		},
-		
-		components: {
-			ZhuigePrivacy
 		},
 
 		onLoad(options) {

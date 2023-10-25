@@ -73,8 +73,6 @@
 				<view @click="clickOrderSubmit" class="cart-btn">立即付款</view>
 			</view>
 		</view>
-
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -97,9 +95,12 @@
 		mapMutations
 	} from 'vuex'
 	import store from '@/store/index.js'
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			
+		},
+		
 		data() {
 			return {
 				address: false,
@@ -108,10 +109,6 @@
 
 				remark: '',
 			}
-		},
-		
-		components: {
-			ZhuigePrivacy
 		},
 
 		computed: {

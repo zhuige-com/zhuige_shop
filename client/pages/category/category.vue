@@ -43,8 +43,6 @@
 			</template>
 
 		</view>
-		
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -66,20 +64,18 @@
 		mapGetters,
 	} from 'vuex'
 	import store from '@/store/index.js'
-	
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			
+		},
+		
 		data() {
 			return {
 				cats: [],
 
 				cur_cat_id: undefined
 			}
-		},
-		
-		components: {
-			ZhuigePrivacy
 		},
 
 		computed: {

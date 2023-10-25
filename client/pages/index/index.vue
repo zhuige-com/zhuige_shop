@@ -96,8 +96,6 @@
 				<jiangqie-no-data v-if="loaded"></jiangqie-no-data>
 			</template>
 		</view>
-
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -119,9 +117,12 @@
 	import {
 		mapGetters,
 	} from 'vuex'
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			JiangqieNoData
+		},
+		
 		data() {
 			this.share_title = undefined;
 			this.share_thumb = undefined;
@@ -150,11 +151,6 @@
 			...mapGetters([
 				'getCartCount'
 			])
-		},
-
-		components: {
-			JiangqieNoData,
-			ZhuigePrivacy
 		},
 
 		onLoad(options) {

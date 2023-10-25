@@ -73,8 +73,6 @@
 				<view @click="clickLink('/pages/order_confirm/order_confirm?goods_id=' + goods.id)">立即购买</view>
 			</view>
 		</view>
-
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -100,9 +98,12 @@
 	import store from '@/store/index.js'
 
 	import JiangqieNoData from "@/components/nodata/nodata";
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			JiangqieNoData
+		},
+		
 		data() {
 			return {
 				goods_id: 0,
@@ -112,11 +113,6 @@
 				loadMore: 'more',
 				loaded: false,
 			}
-		},
-
-		components: {
-			JiangqieNoData,
-			ZhuigePrivacy
 		},
 
 		computed: {

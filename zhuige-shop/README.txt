@@ -4,7 +4,7 @@ Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
 Requires at least: 5.6
 Tested up to: 6.3
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,9 @@ github下载：https://github.com/zhuige-com/zhuige_shop
 2. screenshot-2.png
 
 == Changelog ==
+
+## 1.4.6（2023-10-25）
+1. 删除自定义隐私弹框，改用官方隐私弹框
 
 ## 1.4.5（2023-10-12）
 1. 新增账户注销功能
