@@ -81,6 +81,18 @@
 					<uni-icons type="forward" size="18" color="#AAAAAA"></uni-icons>
 				</view>
 			</view>
+			<view @click="clickScore" class="zhuige-user-opt">
+				<view class="zhuige-user-opt-title">
+					<view>
+						<uni-icons type="star" size="24" color="#666666"></uni-icons>
+					</view>
+					<view>评价打分</view>
+				</view>
+				<view class="zhuige-user-more">
+					<uni-icons type="forward" size="18" color="#AAAAAA"></uni-icons>
+				</view>
+			</view>
+			
 		</view>
 
 		<view class="zhuige-brand">本小程序基于追格（zhuige.com）搭建</view>
@@ -226,6 +238,21 @@
 						}
 					}
 				});
+			},
+			
+			/**
+			 * 点击 评价打分
+			 */
+			clickScore() {
+				var plugin = requirePlugin("wxacommentplugin");
+				plugin.openComment({
+					success: (res) => {
+						console.log('plugin.openComment success', res)
+					},
+					fail: (res) => {
+						console.log('plugin.openComment fail', res)
+					}
+				})
 			}
 		}
 	}

@@ -4,7 +4,7 @@ Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
 Requires at least: 5.6
 Tested up to: 6.3
-Stable tag: 1.4.7
+Stable tag: 1.4.8
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,9 @@ github下载：https://github.com/zhuige-com/zhuige_shop
 2. screenshot-2.png
 
 == Changelog ==
+
+## 1.4.8（2023-11-26）
+1. 新增评价打分功能
 
 ## 1.4.7（2023-11-03）
 1. 新增首页弹框功能
