@@ -2,7 +2,7 @@
     "name" : "client",
     "appid" : "",
     "description" : "",
-    "versionName" : "1.4.9",
+    "versionName" : "1.4.10",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -47,14 +47,18 @@
             "urlCheck" : false
         },
         "usingComponents" : true,
-		"plugins": {
-			"wxacommentplugin": {
-				"version": "latest",
-				"provider": "wx82e6ae1175f264fa"
-			}
-		},
+        "plugins" : {
+            // "wxacommentplugin" : {
+            //     "version" : "latest",
+            //     "provider" : "wx82e6ae1175f264fa"
+            // }
+        },
         "requiredPrivateInfos" : [ "chooseAddress" ],
-		"__usePrivacyCheck__": true
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "获取收货地址"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

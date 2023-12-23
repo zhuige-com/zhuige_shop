@@ -193,13 +193,18 @@
 			 */
 			clickAddress() {
 				uni.chooseAddress({
-					success: res => {
+					success: (res) => {
 						this.address = {
 							addressee: res.userName,
 							mobile: res.telNumber,
 							address: res.provinceName + res.cityName + res.countyName + res.detailInfo
 						}
 						uni.setStorageSync('zhuige_shop_address', this.address);
+					},
+					fail: (res) => {
+						if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
+							Alert.error(res.errMsg);
+						}
 					}
 				})
 			},
