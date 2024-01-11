@@ -2,7 +2,7 @@
     "name" : "client",
     "appid" : "",
     "description" : "",
-    "versionName" : "1.4.10",
+    "versionName" : "1.4.11",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -44,7 +44,10 @@
     "mp-weixin" : {
         "appid" : "",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : true,
+            "postcss" : true,
+            "minified" : true
         },
         "usingComponents" : true,
         "plugins" : {
@@ -58,7 +61,8 @@
             "scope.userLocation" : {
                 "desc" : "获取收货地址"
             }
-        }
+        },
+		"lazyCodeLoading": "requiredComponents"
     },
     "mp-alipay" : {
         "usingComponents" : true

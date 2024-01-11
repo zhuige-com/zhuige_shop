@@ -45,8 +45,8 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 			$session = $this->wx_code2openid($code);
 		}
 
-		if (!$session) {
-			return $this->make_error('授权失败');
+		if (!is_array($session)) {
+			return $this->make_error($session);
 		}
 
 		$user = get_user_by('login', $session['openid']);
@@ -176,8 +176,8 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 			}
 
 			$session = $this->wx_code2openid($code);
-			if (!$session) {
-				return $this->make_error('授权失败');
+			if (!is_array($session)) {
+				return $this->make_error($session);
 			}
 
 			$res = $this->weixin_decryptData($app_id, $session['session_key'], $encrypted_data, $iv, $data);
@@ -241,7 +241,7 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 		}
 
 		if (empty($app_id) || empty($app_secret)) {
-			return false;
+			return '请在后台设置appid和secret';
 		}
 
 		$params = [
@@ -253,13 +253,17 @@ class ZhuiGe_Shop_User_Controller extends ZhuiGe_Shop_Base_Controller
 
 		$result = wp_remote_get(add_query_arg($params, 'https://api.weixin.qq.com/sns/jscode2session'));
 		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
-			return false;
+			return '网络请求异常';
 		}
 
 		// file_put_contents('wx_login', json_encode($result));
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
+
+		if (!isset($session['openid']) || empty($session['openid'])) {
+			return json_encode($session);
+		}
 
 		return $session;
 	}

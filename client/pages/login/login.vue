@@ -13,7 +13,7 @@
 					<view class="jiangqie-login-tip">H5平台尚未适配</view>
 					<!-- #endif -->
 
-					<!-- #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU -->
+					<!-- #ifdef MP-WEIXIN || MP-BAIDU -->
 					<view v-if="code" class="button" @click="clickLogin()">授权登录</view>
 					<!-- #endif -->
 				</template>
@@ -85,7 +85,7 @@
 				this.type = options.type;
 			}
 
-			// #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU
+			// #ifdef MP-WEIXIN || MP-BAIDU
 			uni.login({
 				success: (res) => {
 					this.code = res.code;
@@ -118,10 +118,6 @@
 
 				// #ifdef MP-WEIXIN
 				this.login('微信用户', '');
-				// #endif
-
-				// #ifdef MP-QQ
-				this.login('QQ用户', '');
 				// #endif
 
 				// #ifdef MP-BAIDU
@@ -171,15 +167,18 @@
 				params.channel = 'weixin';
 				// #endif
 
-				// #ifdef MP-QQ
-				params.channel = 'qq';
-				// #endif
-
 				// #ifdef MP-BAIDU
 				params.channel = 'baidu';
 				// #endif
 
 				Rest.post(Api.ZHUIGE_SHOP_USER_LOGIN, params).then(res => {
+					if (res.code != 0) {
+						uni.showModal({
+							content: res.msg
+						})
+						return;
+					}
+					
 					Auth.setUser(res.data);
 					if (res.data.first && res.data.first == 1) {
 						uni.redirectTo({
