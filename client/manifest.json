@@ -2,7 +2,7 @@
     "name" : "client",
     "appid" : "",
     "description" : "",
-    "versionName" : "1.4.11",
+    "versionName" : "1.4.12",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -62,7 +62,8 @@
                 "desc" : "获取收货地址"
             }
         },
-		"lazyCodeLoading": "requiredComponents"
+		"lazyCodeLoading": "requiredComponents",
+		"libVersion": "latest"
     },
     "mp-alipay" : {
         "usingComponents" : true
