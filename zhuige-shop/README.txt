@@ -3,7 +3,7 @@ Contributors: zhuige
 Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
 Requires at least: 5.6
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 1.4.13
 Requires PHP: 7.2
 License: GPLv2 or later
