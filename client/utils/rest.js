@@ -1,4 +1,4 @@
-const Auth = require("./auth.js");
+import Auth from "./auth.js";
 
 /**
  * request封装
@@ -124,7 +124,7 @@ function post(url, data = {}) {
 	return request(url, data, 'POST');
 }
 
-module.exports = {
+export default {
 	get,
 	post,
 	upload,

@@ -3,8 +3,8 @@ Contributors: zhuige
 Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
 Requires at least: 5.6
-Tested up to: 6.4
-Stable tag: 1.4.14
+Tested up to: 6.5
+Stable tag: 1.5.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,12 @@ github下载：https://github.com/zhuige-com/zhuige_shop
 2. screenshot-2.png
 
 == Changelog ==
+
+## 1.5.0（2024-05-23）
+1. 支持 vue3
+
+## 1.4.15（2024-04-29）
+1. 五一快乐!假期特惠,联系追格客服可得
 
 ## 1.4.14（2024-04-01）
 1. 优化评价打分功能

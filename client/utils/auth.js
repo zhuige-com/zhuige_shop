@@ -11,7 +11,7 @@ function getToken() {
 	return user.token;
 }
 
-module.exports = {
+export default {
 	getToken: getToken,
 
 	setUser(user) {

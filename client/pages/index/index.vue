@@ -98,7 +98,7 @@
 		</view>
 		
 		<view v-if="pop_ad" class="zhugie-pop-cover">
-			<view class="" @click="clickPopAd" class="zhuige-pop-box">
+			<view @click="clickPopAd" class="zhuige-pop-box">
 				<image mode="aspectFit" :src="pop_ad.image"></image>
 				<view>
 					<uni-icons @click="clickPopAdClose" type="close" size="32" color="#FFFFFF"></uni-icons>

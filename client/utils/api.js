@@ -1,10 +1,10 @@
-const Config = require("@/utils/config");
+import Config from "@/utils/config";
 
 function makeURL(module, action) {
 	return `https://${Config.JQ_DOMAIN}/wp-json/zhuige-shop/${module}/${action}`;
 }
 
-module.exports = {
+export default {
 
 	// ---------- 文章 ----------
 

@@ -4,7 +4,7 @@
 			<view class="bar">
 				<uni-icons type="search" size="24" color="#333333"></uni-icons>
 				<input type="text" v-model="keyword" confirm-type="search" @confirm="confirmSearch"
-					placeholder="请输入关键词..."></input>
+					placeholder="请输入关键词..." />
 			</view>
 			<text v-if="keyword.length>0" @click="clickSearch">搜索</text>
 			<text v-else @click="clickCancel">取消</text>

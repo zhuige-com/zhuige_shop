@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	//用户信息
 	ZHUIGE_USER_KEY: 'zhuige_user_key',
 

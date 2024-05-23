@@ -1,9 +1,11 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
 
 import Util from '@/utils/util';
 
+// #ifndef VUE3
+import Vue from 'vue'
 Vue.use(Vuex);
+// #endif
 
 const store = new Vuex.Store({
 	state: {

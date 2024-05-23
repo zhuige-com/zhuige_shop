@@ -225,7 +225,7 @@ function getPopAd(pop_ad, key) {
 	return false;
 }
 
-module.exports = {
+export default {
 	updateCartBadge,
 	saveCart,
 	loadCart,
