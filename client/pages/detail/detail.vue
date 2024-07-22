@@ -36,6 +36,31 @@
 				<mp-html :content="goods.content" />
 			</view>
 		</view>
+		
+		<view v-if="goods && goods.recs" class="zhuige-goods-recs">
+			<view class="recs-title">相关推荐</view>
+			<view class="zhuige-goods-list">
+				<view v-for="(item,index) in goods.recs" :key="index"
+					@click="clickLink('/pages/detail/detail?goods_id=' + item.id)" class="zhuige-goods">
+					<image :src="item.thumbnail" mode="aspectFill"></image>
+					<view class="zhuige-goods-text">
+						<view class="zhuige-goods-title">
+							<text v-if="item.badge" class="mark">{{item.badge}}</text>
+							<text>{{item.title}}</text>
+						</view>
+						<view class="zhuige-goods-price">
+							<view class="promotion">
+								<text>￥</text>
+								<text>{{item.price}}</text>
+							</view>
+							<view class="original">
+								<text>￥{{item.orig_price}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
 
 		<view class="zhuige-comment-list">
 			<view class="zhuige-comment-header">
@@ -274,5 +299,20 @@
 				}
 			}
 		}
+	}
+	
+	.zhuige-goods-recs {
+		padding: 30rpx;
+		border-top: 16rpx solid #EEEEEE;
+	}
+	
+	.recs-title {
+		font-size: 36rpx;
+		font-weight: 600;
+		padding-bottom: 20rpx;
+	}
+	
+	.zhuige-goods-list {
+		padding: 0;
 	}
 </style>

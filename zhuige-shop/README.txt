@@ -4,7 +4,7 @@ Donate link: https://www.zhuige.com/
 Tags: 追格,商城,小程序,微信
 Requires at least: 5.6
 Tested up to: 6.5
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,10 @@ github下载：https://github.com/zhuige-com/zhuige_shop
 2. screenshot-2.png
 
 == Changelog ==
+
+## 1.5.1（2024-07-19）
+1. 新增：商品详情增加猜你喜欢（同类产品）
+2. 修复了已知的bug
 
 ## 1.5.0（2024-05-23）
 1. 支持 vue3

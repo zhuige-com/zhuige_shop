@@ -93,7 +93,44 @@ class ZhuiGe_Shop_Goods_Controller extends ZhuiGe_Shop_Base_Controller
 
 		$options = get_post_meta($postObj->ID, 'zhuige-jq_goods-opt', true);
 
-		return $this->make_success(array_merge($post, $options));
+		$post = array_merge($post, $options);
+
+		//查询分类
+		$cats = get_the_terms($post_id, 'jq_goods_cat');
+		$cat_ids = [];
+		foreach ($cats as $cat) {
+			$cat_ids[] = $cat->term_id;
+		}
+
+		// 推荐商品
+		$args = [
+			'posts_per_page' => 4,
+			'offset' => 0,
+			'orderby' => 'date',
+			'post_type' => ['jq_goods'],
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'jq_goods_cat',
+					'field' => 'id',
+					'terms' => $cat_ids,
+					'operator' => 'IN'
+				),
+			),
+			'post__not_in' => [$post_id]
+		];
+
+		$query = new WP_Query();
+		$result = $query->query($args);
+		$recs = [];
+		foreach ($result as $item) {
+			$recs[] = $this->_formatPost($item);
+		}
+
+		if (count($recs) > 0) {
+			$post['recs'] = $recs;
+		}
+
+		return $this->make_success($post);
 	}
 
 	/**
